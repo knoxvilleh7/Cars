@@ -6,11 +6,11 @@ import java.util.Map;
 /**
  * Created on 16.08.2016.
  */
-public class MyExcep extends Exception {
+public class ValidException extends Exception {
 
-    private Map<String, List<String >> errs;
+    private Map<String, List<String>> errs;
 
-    public MyExcep(Map<String, List<String >> msg) {
+    public ValidException(Map<String, List<String>> msg) {
         errs = msg;
     }
 

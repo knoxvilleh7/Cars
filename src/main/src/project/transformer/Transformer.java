@@ -17,7 +17,7 @@ public class Transformer {
         Car car = new Car();
         car.setModel(Util.getString(request, MODEL));
         car.setManufacturerEmail(Util.getString(request, MEMAIL));
-        car.setProductionDate(Util.getString(request, PD));
+        car.setProductionDate(Util.getDate(request, PD));
         car.setMotorShowId(Util.getInteger(request, MSID));
         car.setId(Util.getInteger(request, ID));
         car.setManufacturer(Util.getString(request, MANUFACTURER));
@@ -34,5 +34,9 @@ public class Transformer {
         motorShow.setAddress(Util.getString(request, ADDRESS));
 
         return motorShow;
+    }
+    public  static String getCarVin(HttpServletRequest request){
+        String vin = Util.getString(request, VIN);
+        return vin;
     }
 }

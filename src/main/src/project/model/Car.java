@@ -3,39 +3,50 @@ package project.model;
 import net.sf.oval.constraint.*;
 import project.util.VinCheck;
 
+import java.sql.Date;
+
+
 /**
  * Created on 15.08.2016.
  */
 public class Car {
     private Integer id;
+
     @NotNull(message = "Field is empty")
     @NotEmpty (message = "Field is empty")
     private String model;
+
     @NotNull (message = "Field is empty")
     @NotEmpty (message = "Field is empty")
-    private String productionDate;
+    private Date productionDate;
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     private String manufacturer;
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @Email (message = "E-mail is not real")
     private String manufacturerEmail;
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
+    @Min(value = 0, message = "Negative value")
     private Integer motorShowId;
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @Min(value = 0, message = "Negative value")
     private Double price;
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @Min(value = 0, message = "Negative value")
     private Double engineVolume;
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @CheckWith(value = VinCheck.class, message = "Car already exists")
-    @Min(value = 0, message = "Negative value")
     private String vinCode;
 
 
@@ -47,11 +58,11 @@ public class Car {
         this.model = model;
     }
 
-    public String getProductionDate() {
+    public Date getProductionDate() {
         return productionDate;
     }
 
-    public void setProductionDate(String productionDate) {
+    public void setProductionDate(Date productionDate) {
         this.productionDate = productionDate;
     }
 

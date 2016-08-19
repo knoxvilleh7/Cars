@@ -1,6 +1,7 @@
 package project.sevice;
 
-import project.exception.MyExcep;
+import project.exception.DaoException;
+import project.exception.ValidException;
 import project.model.Car;
 
 import java.util.List;
@@ -10,11 +11,11 @@ import java.util.List;
  */
 public interface CarService {
 
-    void saveCar(Car car) throws MyExcep;
+    void saveCar(Car car) throws ValidException, DaoException;
 
-    List<Car> getCarsByMSId(Integer msid);
+    List<Car> getCarsByMSId(Integer motorShowId) throws DaoException;
 
-    Car getCarById(Integer id);
+    Car getCarById(Integer id) throws DaoException;
 
-    void deleteCar(Integer id);
+    void deleteCar(Integer id) throws DaoException;
 }

@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static project.constants.PageConst.START;
+
 /**
  * Created on 15.08.2016.
  */
-public class DefUrl implements RequestInterface {
+public class DefaultUrl implements RequestInterface {
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if (request.getParameterMap().isEmpty()) {
-            request.getRequestDispatcher("pages/index.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher(START).forward(request, response);
     }
 }

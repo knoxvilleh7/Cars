@@ -1,0 +1,116 @@
+.col-lg-8 {
+    height: 650px;
+    /*background: white;*/
+}
+
+.refs {
+
+    margin-top: 310px;
+    margin-left: 120px;
+}
+
+.btn-primary {
+    height: 120px;
+    width: 120px;
+    margin-left: 450px;
+    text-align: center;
+    line-height: 110px;
+    font-family: SansSerif, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+    color: White;
+
+}
+
+.btn-danger {
+    height: 120px;
+    width: 120px;
+    text-align: center;
+    line-height: 40px;
+    font-family: SansSerif, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    color: White;
+}
+
+.form {
+    margin-top: 150px;
+    margin-left: 5%;
+}
+
+.form-group {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.table_price {
+    margin-top: 60px;
+    border-collapse: collapse;
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    font-family: "Lucida Grande", sans-serif;
+    margin-bottom: 40px;
+}
+
+.table_price caption {
+    background: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    /*box-shadow: 0 2px  4px 0 rgba(0,0,0,.3);*/
+    color: #000000;
+    font-family: "Roboto Slab", serif;
+    font-style: normal;
+    font-size: 26px;
+    text-align: center;
+    margin: 0;
+}
+
+.table_price td, .table_price th {
+    padding: 10px;
+}
+
+.table_price th {
+    text-align: left;
+    font-size: 18px;
+}
+
+.table_price tr:nth-child(2n) {
+    background: #E5E5E5;
+}
+
+.table_price td:last-of-type {
+    text-align: center;
+}
+
+.table_price a {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #F79361;
+    box-shadow: 2px 2px 0 0 #a22800;
+    position: relative;
+}
+
+.table_price a:hover {
+    box-shadow: none;
+    top: 2px;
+    left: 2px;
+}
+
+.c {
+    border: 1px solid #333; /* Рамка */
+    display: inline-block;
+    padding: 5px 15px; /* Поля */
+    text-decoration: none; /* Убираем подчёркивание */
+    color: #000; /* Цвет текста */
+    background-color: #cdecff;
+}
+
+.c:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Тень */
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+    color: #a00;
+}

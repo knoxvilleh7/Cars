@@ -1,5 +1,6 @@
 package project.dao;
 
+import project.exception.DaoException;
 import project.model.Car;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Created on 15.08.2016.
  */
-public interface CarDao {
+public interface CarDao extends ObjectDelete{
 
     String SQL_GET_ALL_CARS = "SELECT * FROM cars";
     String SQL_SAVE_CAR = "INSERT INTO cars(model, manufactureremail,  productiondate," +
@@ -17,17 +18,17 @@ public interface CarDao {
     String SQL_GET_CAR_BY_ID = "SELECT * FROM cars WHERE id=?";
     String SQL_GET_CAR_BY_VIN = "SELECT * FROM cars WHERE vincode=?";
     String SQL_GET_CARS_BY_MSID = "SELECT * FROM cars WHERE motorshowid=?";
-    String SQL_DELETE_CAR = "DELETE FROM cars WHERE id = ?";
 
-    List<Car> getCars();
 
-    void saveCar(Car car);
+    List<Car> getCars() throws DaoException;
 
-    Car getCarById(Integer id);
+    void saveCar(Car car) throws DaoException;
 
-    Car getCarByVin(Integer vin);
+    Car getCarById(Integer id) throws DaoException;
 
-    void deleteCar(Integer id);
+    Car getCarByVin(String vin) throws DaoException;
 
-    List<Car> getCarsByMSId(Integer msid);
+
+
+    List<Car> getCarsByMSId(Integer msid) throws DaoException;
 }
