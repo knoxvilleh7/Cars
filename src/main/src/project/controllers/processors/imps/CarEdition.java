@@ -28,11 +28,12 @@ public class CarEdition implements RequestInterface {
     private CarService carService = new CarServiceImpl();
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
-        Integer motorShowId = Util.getInteger(request, MS);
+        Integer motorShowId = Util.getInteger(request, MSID);
         Integer id = Util.getInteger(request, CAR);
         if (motorShowId != null) {
             request.setAttribute(MSID, motorShowId);
-        } else if (id != null) {
+        }
+        if (id != null) {
             Car car = carService.getCarById(id);
             request.setAttribute(ID, id);
             request.setAttribute(CAR, car);

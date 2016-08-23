@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/local/html5shiv.min.js"></script>
+    <script src="js/local/respond.min.js"></script>
 
     <title>Motor Shows.</title>
 </head>
@@ -26,10 +26,10 @@
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="/" >Return to main</a></li>
-                <li><a href="/caredition" >Create car</a></li>
-                <li><a href="/motorshowedition">Create Motor Show</a></li>
-                <li><a href="/cars">Return to Cars</a></li>
+                <li><a href="${pageContext.request.contextPath}/" >Return to main</a></li>
+                <li><a href="caredition" >Create car</a></li>
+                <li><a href="motorshowedition">Create Motor Show</a></li>
+                <li><a href="cars">Return to Cars</a></li>
             </ul>
         </div>
     </div>
@@ -44,32 +44,23 @@
             <th>Name</th>
             <th>Address</th>
         </tr>
-        <c:forEach var="MS" items="${show}">
+        <c:forEach var="MS" items="${motorShow}">
             <tr>
                 <td><c:out value="${MS.name}"/></td>
                 <td><c:out value="${MS.address}"/></td>
                 <td>
                     <div>
-                        <c:url value="/motorshowedition" var="edit">
-                            <c:param name="MSID" value="${MS.id}"/>
-                        </c:url>
-                        <a href=" <c:out value="${edit}"/>" id="editlink">Edit</a>
+                        <a href="motorshowedition?motorShowId=${MS.id}">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <c:url value="/deleteshow" var="delete">
-                            <c:param name="MSID" value="${MS.id}"/>
-                        </c:url>
-                        <a href=" <c:out value="${delete}"/>" id="deletelink">Delete</a>
+                        <a href="deleteshow?motorShowId=${MS.id}">Delete</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <c:url value="/mscars" var="mscars">
-                            <c:param name="MSID" value="${MS.id}"/>
-                        </c:url>
-                        <a href=" <c:out value="${mscars}"/>" id="mscarslink">Show cars</a>
+                        <a href="mscars?motorShowId=${MS.id}">Show cars</a>
                     </div>
                 </td>
             </tr>

@@ -3,52 +3,93 @@ package project.model;
 import net.sf.oval.constraint.*;
 import project.util.VinCheck;
 
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.Date;
 
 
-/**
- * Created on 15.08.2016.
- */
+@Entity
+@Table(name= "cars")
+
 public class Car {
+
+    @Id
+    @GeneratedValue
     private Integer id;
+
+    @Column(name= "car_model", length=100)
 
     @NotNull(message = "Field is empty")
     @NotEmpty (message = "Field is empty")
     private String model;
 
+    @Column(name= "car_production_date")
+    @Temporal(value=TemporalType.DATE)
+
+    @DateRange (max = "tomorrow", message = "Wrong date")
     @NotNull (message = "Field is empty")
     @NotEmpty (message = "Field is empty")
     private Date productionDate;
 
+    @Column(name= "car_manufacturer", length=100)
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     private String manufacturer;
+
+    @Column(name= "car_manufacturer_email", length=100)
 
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @Email (message = "E-mail is not real")
     private String manufacturerEmail;
 
+    @Column(name= "motor_show_id", insertable = false, updatable = false)
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @Min(value = 0, message = "Negative value")
     private Integer motorShowId;
+
+    @Column(name= "car_price")
 
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @Min(value = 0, message = "Negative value")
     private Double price;
 
+    @Column(name= "car_engine_volume")
+
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @Min(value = 0, message = "Negative value")
     private Double engineVolume;
+
+    @Column(name= "car_vin_code")
 
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     @CheckWith(value = VinCheck.class, message = "Car already exists")
     private String vinCode;
 
+    @ManyToOne
+    @JoinColumn(name = "motor_show_id")
+    private MotorShow motorShow;
+
+    public Car(String model, Date productionDate, String manufacturer, String manufacturerEmail, Integer motorShowId,
+               Double price, Double engineVolume, String vinCode, MotorShow motorShow) {
+        this.model = model;
+        this.productionDate = productionDate;
+        this.manufacturer = manufacturer;
+        this.manufacturerEmail = manufacturerEmail;
+        this.motorShowId = motorShowId;
+        this.price = price;
+        this.engineVolume = engineVolume;
+        this.vinCode = vinCode;
+        this.motorShow = motorShow;
+    }
+
+    public Car() {
+    }
 
     public String getModel() {
         return model;
@@ -120,5 +161,13 @@ public class Car {
 
     public void setVinCode(String vinCode) {
         this.vinCode = vinCode;
+    }
+
+    public MotorShow getMotorShow() {
+        return motorShow;
+    }
+
+    public void setMotorShow(MotorShow motorShow) {
+        this.motorShow = motorShow;
     }
 }

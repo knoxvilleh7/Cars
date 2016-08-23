@@ -13,9 +13,13 @@ public interface CarService {
 
     void saveCar(Car car) throws ValidException, DaoException;
 
-    List<Car> getCarsByMSId(Integer motorShowId) throws DaoException;
+    List<Car> getCarsByMSId(Integer motorShowId);
 
-    Car getCarById(Integer id) throws DaoException;
+    Car getCarById(Integer id);
 
-    void deleteCar(Integer id) throws DaoException;
+    Car getCarByVin(String vinCode);
+
+    List<Car> getCars();
+
+    void deleteCar(Integer id);
 }

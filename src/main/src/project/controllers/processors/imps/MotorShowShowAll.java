@@ -1,10 +1,10 @@
 package project.controllers.processors.imps;
 
 import project.controllers.processors.RequestInterface;
-import project.dao.MotorShowDao;
-import project.dao.MotorShowDaoImpl;
 import project.exception.DaoException;
 import project.model.MotorShow;
+import project.sevice.MShowService;
+import project.sevice.MShowServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,12 +21,12 @@ import static project.constants.PageConst.*;
 public class MotorShowShowAll implements RequestInterface {
 
 
-    private MotorShowDao motorShowDao = new MotorShowDaoImpl();
+    private MShowService mShowService = new MShowServiceImpl();
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
 
 
-        List<MotorShow> mShow = motorShowDao.getMotorShows();
+        List<MotorShow> mShow = mShowService.getAllMotorShows();
         request.setAttribute(MOTORSHOW, mShow);
         request.getRequestDispatcher(MSALL).forward(request, response);
     }

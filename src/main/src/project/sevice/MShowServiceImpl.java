@@ -1,7 +1,7 @@
 package project.sevice;
 
-import project.dao.MotorShowDao;
-import project.dao.MotorShowDaoImpl;
+import project.newDao.MotorShowDao;
+import project.newDao.MotorShowDaoImpl;
 import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.MotorShow;
@@ -15,28 +15,28 @@ import java.util.Map;
  */
 public class MShowServiceImpl implements MShowService {
 
-    private MotorShowDao motorShowDao = new MotorShowDaoImpl();
+    private MotorShowDao motorShowDao = new MotorShowDaoImpl(MotorShow.class);
     private ModelValidator mv = new ModelValidator();
 
-    public void mShowSave(MotorShow motorShow) throws ValidException, DaoException {
+    public void mShowSave(MotorShow motorShow) throws ValidException{
         Map<String, List<String>> errs = mv.mValid(motorShow);
         if (errs.isEmpty()) {
-            motorShowDao.saveMotorShow(motorShow);
+            motorShowDao.saveOrUpdate(motorShow);
         } else {
             throw new ValidException(errs);
         }
     }
 
-    public MotorShow getMShowById(Integer id) throws DaoException {
-        return motorShowDao.getMotorShowById(id);
+    public MotorShow getMShowById(Integer id){
+        return motorShowDao.getById(id);
     }
 
-    public void delete(Integer id) throws DaoException {
-        motorShowDao.delete("motorshows", id);
+    public void delete(Integer id){
+        motorShowDao.deleteById(motorShowDao.getById(id));
     }
 
-    public List<MotorShow> getAllMotorShows() throws DaoException {
-        return motorShowDao.getMotorShows();
+    public List<MotorShow> getAllMotorShows(){
+        return motorShowDao.getAll();
     }
 
 }

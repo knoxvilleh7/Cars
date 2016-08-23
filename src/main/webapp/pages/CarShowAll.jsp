@@ -3,10 +3,10 @@
 <%--<c:url value="/caredition" var="edit">--%>
     <%--<c:param name="car" value="${car.id}"/>--%>
 <%--</c:url>--%>
-<c:url value="/deletecar" var="delete">
+<c:url value="deletecar" var="delete">
     <c:param name="car" value="${car.id}"/>
 </c:url>
-<c:url value="/mscars" var="mshow">
+<c:url value="mscars" var="mshow">
     <c:param name="motorShowId" value="${car.motorShowId}"/>
 </c:url>
 <!DOCTYPE html>
@@ -17,8 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/local/html5shiv.min.js"></script>
+    <script src="js/local/respond.min.js"></script>
     <title>All cars</title>
 
 </head>
@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
                 <li><a href="${pageContext.request.contextPath}/">Return to main</a></li>
-                <li><a href="/caredition">Create car</a></li>
+                <li><a href="caredition">Create car</a></li>
                 <%--<li><a href="">Punkt 3</a></li>--%>
                 <%--<li><a href="">Punkt 4</a></li>--%>
             </ul>
@@ -67,18 +67,18 @@
                 <td><c:out value="${car.vinCode}"/></td>
                 <td>
                     <div>
-                        <a href="caredition?car=${car.id}" id="editlink">Edit</a>
+                        <a href="caredition?car=${car.id}">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
 
-                        <a href="${delete}" id="deletelink">Delete</a>
+                        <a href="deletecar?car=${car.id}">Delete</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="${mshow}" id="mslink">To Motor Show</a>
+                        <a href="mscars?motorShowId=${car.motorShowId}">To Motor Show</a>
                     </div>
                 </td>
             </tr>

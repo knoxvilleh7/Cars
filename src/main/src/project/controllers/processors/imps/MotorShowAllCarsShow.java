@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.List;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.PageConst.EXCEPLIST;
 import static project.constants.PageConst.MSALLCARS;
 
 /**
@@ -26,7 +25,7 @@ public class MotorShowAllCarsShow implements RequestInterface {
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
 
-        Integer motorShowId = Util.getInteger(request, MS);
+        Integer motorShowId = Util.getInteger(request, MSID);
 
         List<Car> cars = carService.getCarsByMSId(motorShowId);
         request.setAttribute(CARS, cars);

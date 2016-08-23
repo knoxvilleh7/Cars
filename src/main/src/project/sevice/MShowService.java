@@ -11,11 +11,12 @@ import java.util.List;
  */
 public interface MShowService {
 
-    void mShowSave(MotorShow motorShow) throws ValidException, DaoException;
+    void mShowSave(MotorShow motorShow) throws ValidException;
 
-    MotorShow getMShowById(Integer id) throws DaoException;
+    MotorShow getMShowById(Integer id);
 
-    void delete(Integer id) throws DaoException;
+    void delete(Integer id);
 
-    List<MotorShow>  getAllMotorShows() throws DaoException;
+    List<MotorShow> getAllMotorShows();
+
 }

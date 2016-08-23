@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/local/html5shiv.min.js"></script>
+    <script src="js/local/respond.min.js"></script>
 
-    <title>Edit Show</title>
+    <title>Create or edit motor show</title>
 </head>
-<body>
+<body class="motorShowEdit">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -25,9 +25,9 @@
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="/">Return to main</a></li>
-                <li><a href="/motorshows">Return to MotorShows</a></li>
-                <li><a href="/cars">Return to Cars</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Return to main</a></li>
+                <li><a href="motorshows">Return to MotorShows</a></li>
+                <li><a href="cars">Return to Cars</a></li>
                 <%--<li><a href="">Punkt 4</a></li>--%>
 
             </ul>
@@ -35,14 +35,14 @@
     </div>
 </div>
 
-<div  class="col-lg-8">
+<div class="motorShowEdition  col-lg-8">
     <form class="form" method="post" action="/mssave">
         <div class="form-group">
             <label for="name" class="text-right col-sm-3">Motor show name:</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="name" id="name" value="${show.name}">
+                <input type="text" class="form-control" name="name" id="name" value="${motorShow.name}">
             </div>
-            <div>
+            <div class="col-sm-offset-4">
                 ${errs.name}
             </div>
         </div>
@@ -50,16 +50,18 @@
         <div class="form-group">
             <label for="address" class="text-right col-sm-3">Motor show address:</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="address" id="address" value="${show.address}">
+                <input type="text" class="form-control" name="address" id="address" value="${motorShow.address}">
             </div>
-            <div>
+            <div class="col-sm-offset-4">
                 ${errs.address}
             </div>
         </div>
+        <div class="col-sm-offset-6">
+            <button type="submit" class="btn">Submit</button>
+        </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
         <div>
-            <input type="hidden" name="id" value="${show.id}">
+            <input type="hidden" name="id" value="${motorShow.id}">
         </div>
         <%--<div>--%>
         <%--<a href="/" class="c">Return to main</a><br>--%>

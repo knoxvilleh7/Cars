@@ -24,11 +24,10 @@ public class MotorShowEdition implements RequestInterface {
     private MShowService mShowService = new MShowServiceImpl();
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
+
         Integer motorShowId = Util.getInteger(request, MSID);
         if (motorShowId != null) {
-
-            MotorShow motorShow = mShowService.getMShowById(motorShowId);
-            request.setAttribute(MOTORSHOW, motorShow);
+            request.setAttribute(MOTORSHOW, mShowService.getMShowById(motorShowId));
         }
         request.getRequestDispatcher(MSEDIT).forward(request, response);
     }

@@ -2,7 +2,6 @@ package project.controllers.processors.imps;
 
 import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
-import project.model.Car;
 import project.sevice.CarService;
 import project.sevice.CarServiceImpl;
 import project.util.Util;
@@ -12,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static project.constants.AttributeConst.*;
+import static project.constants.AttributeConst.CAR;
+import static project.constants.AttributeConst.MSID;
 import static project.constants.PageConst.CARSOFMS;
-import static project.constants.PageConst.EXCEPLIST;
 
 /**
  * Created on 16.08.2016.

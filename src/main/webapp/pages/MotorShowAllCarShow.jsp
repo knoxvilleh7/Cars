@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/local/html5shiv.min.js"></script>
+    <script src="js/local/respond.min.js"></script>
     <title>Available cars</title>
 </head>
 <body>
@@ -25,10 +25,10 @@
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="/" >Return to main</a></li>
-                <li><a href="/caredition?MS=${msid}" >Create Car</a></li>
-                <li><a href="/motorshows" >Return to Motor Shows</a></li>
-                <li><a href="/cars">Return to Cars</a></li>
+                <li><a href="${pageContext.request.contextPath}/" >Return to main</a></li>
+                <li><a href="caredition?motorShowId=${motorShowId}" >Create Car</a></li>
+                <li><a href="motorshows" >Return to Motor Shows</a></li>
+                <li><a href="cars">Return to Cars</a></li>
             </ul>
         </div>
     </div>
@@ -58,16 +58,18 @@
                 <td><c:out value="${car.vinCode}"/></td>
                 <td>
                     <div>
-                        <c:url value="/caredition" var="edit">
+                        <c:url value="caredition" var="edit">
                             <c:param name="car" value="${car.id}"/>
+                            <c:param name="motorShowId" value="${car.motorShowId}"/>
                         </c:url>
                         <a href=" <c:out value="${edit}"/>" id="editlink">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <c:url value="/deletecar" var="delete">
+                        <c:url value="deletecar" var="delete">
                             <c:param name="car" value="${car.id}"/>
+                            <c:param name="motorShowId" value="${car.motorShowId}"/>
                         </c:url>
                         <a href=" <c:out value="${delete}"/>" id="deletelink">Delete</a>
                     </div>

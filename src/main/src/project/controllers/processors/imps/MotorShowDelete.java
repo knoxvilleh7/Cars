@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static project.constants.AttributeConst.ERRS;
-import static project.constants.AttributeConst.MS;
-import static project.constants.AttributeConst.MSID;
-import static project.constants.PageConst.EXCEPLIST;
+import static project.constants.AttributeConst.*;
 import static project.constants.PageConst.MSALLCONT;
 
 /**

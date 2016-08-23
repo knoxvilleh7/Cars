@@ -10,6 +10,7 @@ public class AttributeConst {
     public static final String MS = "MS";
     public static final String ID = "id";
     public static final String MSID = "motorShowId";
+    public static final String MSIDABB = "MSID";
     public static final String MSHOWS = "mShows";
     public static final String MOTORSHOW = "motorShow";
     public static final String ERRS = "errs";
