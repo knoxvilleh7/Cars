@@ -34,7 +34,7 @@
                 <li><a href="motorshows" >Return to Motor Shows</a></li>
                 <li><a href="cars">Return to Cars</a></li>
                 <li class="menu-bar-page">
-                    <button type="submit" class="btn" name="pageNumber" value="${(page.getPageNumber())-1}">
+                    <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if> class="btn" name="pageNumber" value="${(page.getPageNumber())-1}">
                         Previous
                     </button>
                 </li>
@@ -45,7 +45,7 @@
                     </label>
                 </li>
                 <li class="menu-bar">
-                    <button type="submit" class="btn" name="pageNumber" value="${(page.getPageNumber())+1}">Next
+                    <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if> class="btn" name="pageNumber" value="${(page.getPageNumber())+1}">Next
                     </button>
                 </li>
                 <li class="menu-bar-beg">

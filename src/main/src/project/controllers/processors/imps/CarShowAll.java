@@ -35,6 +35,8 @@ public class CarShowAll implements RequestInterface {
             page.setPageNumber(DEFAULTPAGENUMBER);
         }
         page.setPageCount(getNumberOfPages(carService.getCarCount(), page.getPageSize()));
+        page.setToNext(page.getPageNumber()<page.getPageCount());
+        page.setToPrev(page.getPageNumber()>1);
         List<Car> cars = carService.getCars(page.getPageNumber(), page.getPageSize());
         request.setAttribute(CARS, cars);
         request.setAttribute(PAGE, page);

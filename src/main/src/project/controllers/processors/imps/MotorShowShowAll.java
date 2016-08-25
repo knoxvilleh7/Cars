@@ -36,6 +36,8 @@ public class MotorShowShowAll implements RequestInterface {
             page.setPageNumber(DEFAULTPAGENUMBER);
         }
         page.setPageCount(getNumberOfPages(mShowService.getMotorShowCount(), page.getPageSize()));
+        page.setToNext(page.getPageNumber()<page.getPageCount());
+        page.setToPrev(page.getPageNumber()>1);
         List<MotorShow> motorShows = mShowService.getAllMotorShows(page.getPageNumber(), page.getPageSize());
         request.setAttribute(MOTORSHOW, motorShows);
         request.setAttribute(PAGE, page);
