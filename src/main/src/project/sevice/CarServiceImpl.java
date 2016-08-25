@@ -2,6 +2,7 @@ package project.sevice;
 
 import project.exception.ValidException;
 import project.model.Car;
+import project.model.MotorShow;
 import project.newDao.CarDao;
 import project.newDao.CarDaoImpl;
 import project.newDao.NewDaoGenerics;
@@ -10,6 +11,8 @@ import project.util.ModelValidator;
 
 import java.util.List;
 import java.util.Map;
+
+import static project.constants.AttributeConst.CAR;
 
 
 public class CarServiceImpl implements CarService {
@@ -26,8 +29,8 @@ public class CarServiceImpl implements CarService {
         }
     }
 
-    public List<Car> getCarsByMSId(Integer MotorShowId) {
-        return carDao.getCarsByMSId(MotorShowId);
+    public List<Car> getCarsByMSId(Integer MotorShowId, Integer pageNumber, Integer pageSize) {
+        return carDao.getCarsByMSId(MotorShowId, pageNumber, pageSize);
     }
 
     public Car getCarById(Integer id) {
@@ -38,10 +41,18 @@ public class CarServiceImpl implements CarService {
         return null;
     }
 
-    public List<Car> getCars() {
-        return carDao.getAll();
+    public List<Car> getCars(Integer pageNumber, Integer pageSize) {
+        return carDao.getAll(pageNumber, pageSize);
     }
 
+    public Long getCarCount(){
+       return carDao.getCount(CAR, null);
+    }
+
+    @Override
+    public Long getCarOfShowCount(Integer motorShowId) {
+        return carDao.getCount(CAR, motorShowId );
+    }
 
     public void deleteCar(Integer id) {
         carDao.deleteById(carDao.getById(id));

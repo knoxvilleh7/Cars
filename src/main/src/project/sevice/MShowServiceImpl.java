@@ -10,6 +10,8 @@ import project.util.ModelValidator;
 import java.util.List;
 import java.util.Map;
 
+import static project.constants.AttributeConst.MOTORSHOW;
+
 /**
  * Created on 15.08.2016.
  */
@@ -35,8 +37,17 @@ public class MShowServiceImpl implements MShowService {
         motorShowDao.deleteById(motorShowDao.getById(id));
     }
 
-    public List<MotorShow> getAllMotorShows(){
-        return motorShowDao.getAll();
+    public List<MotorShow> getAllMotorShows(Integer pageNumber, Integer pageSize){
+        return motorShowDao.getAll(pageNumber, pageSize);
+    }
+
+    @Override
+    public List<MotorShow> getAllMotorShowsForRegistration() {return motorShowDao.getAllMotorShowsForRegistration();
+    }
+
+    @Override
+    public Long getMotorShowCount() {
+        return motorShowDao.getCount(MOTORSHOW, null);
     }
 
 }

@@ -34,7 +34,7 @@
 
 
 <div align="center" class="carEdition col-lg-8">
-    <form class="form" method="post" action="/carsave">
+    <form class="form" method="post" action="carsave">
         <div class="form-group">
 
             <label for="model" class="text-right col-sm-3" control-label>Car model:</label>

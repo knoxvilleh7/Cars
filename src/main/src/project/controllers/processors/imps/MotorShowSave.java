@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.PageConst.*;
+import static project.constants.PagesConst.*;
 
 /**
  * Created on 16.08.2016.

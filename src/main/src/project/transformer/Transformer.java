@@ -2,12 +2,14 @@ package project.transformer;
 
 import project.model.Car;
 import project.model.MotorShow;
+import project.model.Page;
 import project.util.Util;
 
 import javax.servlet.http.HttpServletRequest;
 
 import static project.constants.CarConst.*;
 import static project.constants.MotorShowConst.*;
+import static project.constants.PageConst.*;
 
 /**
  * Created on 15.08.2016.
@@ -34,6 +36,15 @@ public class Transformer {
         motorShow.setAddress(Util.getString(request, ADDRESS));
 
         return motorShow;
+    }
+
+    public static Page getPageParam(HttpServletRequest request) {
+        Page page = new Page();
+        page.setPageCount(Util.getLong(request, COUNT));
+        page.setPageNumber(Util.getInteger(request, NUMBER));
+        page.setPageSize(Util.getInteger(request, SIZE));
+
+        return page;
     }
     public  static String getCarVin(HttpServletRequest request){
         String vin = Util.getString(request, VIN);

@@ -23,6 +23,15 @@ public class Util {
         return result;
     }
 
+    public static Long getLong(HttpServletRequest request, String param) {
+        Long result = null;
+        try {
+            result = Long.parseLong(request.getParameter(param));
+        } catch (NumberFormatException ignored) {
+        }
+        return result;
+    }
+
     public static Double getDouble(HttpServletRequest request, String param) {
         Double result = null;
         try {

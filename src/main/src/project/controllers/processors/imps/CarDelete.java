@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import static project.constants.AttributeConst.CAR;
 import static project.constants.AttributeConst.MSID;
-import static project.constants.PageConst.CARSOFMS;
+import static project.constants.PagesConst.CARSOFMS;
 
 /**
  * Created on 16.08.2016.

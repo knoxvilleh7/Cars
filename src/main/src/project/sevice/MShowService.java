@@ -17,6 +17,10 @@ public interface MShowService {
 
     void delete(Integer id);
 
-    List<MotorShow> getAllMotorShows();
+    List<MotorShow> getAllMotorShows(Integer pageNumber, Integer pageSize);
+
+    List<MotorShow> getAllMotorShowsForRegistration();
+
+    Long getMotorShowCount();
 
 }

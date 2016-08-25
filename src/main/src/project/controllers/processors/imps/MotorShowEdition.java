@@ -2,7 +2,6 @@ package project.controllers.processors.imps;
 
 import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
-import project.model.MotorShow;
 import project.sevice.MShowService;
 import project.sevice.MShowServiceImpl;
 import project.util.Util;
@@ -13,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.PageConst.EXCEPLIST;
-import static project.constants.PageConst.MSEDIT;
+import static project.constants.PagesConst.MSEDIT;
 
 /**
  * Created on 16.08.2016.

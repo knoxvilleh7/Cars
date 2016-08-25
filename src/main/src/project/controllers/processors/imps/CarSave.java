@@ -4,7 +4,6 @@ import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.Car;
-import project.model.MotorShow;
 import project.sevice.CarService;
 import project.sevice.CarServiceImpl;
 import project.sevice.MShowService;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.PageConst.CAREDIT;
-import static project.constants.PageConst.CARSOFMS;
+import static project.constants.PagesConst.CAREDIT;
+import static project.constants.PagesConst.CARSOFMS;
 
 /**
  * Created on 16.08.2016.

@@ -38,7 +38,7 @@ public class CarDaoImpl extends NewDaoGenericsImpl<Car> implements CarDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Car> getCarsByMSId(Integer MotorShowId) {
+    public List<Car> getCarsByMSId(Integer MotorShowId, Integer pageNumber, Integer pageSize) {
 
         Session session = null;
         Transaction tx = null;
@@ -47,6 +47,8 @@ public class CarDaoImpl extends NewDaoGenericsImpl<Car> implements CarDao {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Car.class).add(Restrictions.eq("motorShowId", MotorShowId));
+        criteria.setFirstResult((pageNumber - 1) * pageSize);
+        criteria.setMaxResults(pageSize);
             cars = criteria.list();
             tx.commit();
         } catch (RuntimeException e) {

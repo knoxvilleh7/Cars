@@ -1,10 +1,14 @@
 package project.newDao;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import project.util.HibernateUtil;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Created on 23.08.2016.
@@ -58,22 +62,27 @@ public class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
             if (session != null) {
                 session.close();
             }
-        } return obj;
+        }
+        return obj;
     }
 
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<T> getAll() {
+    public List<T> getAll(Integer pageNumber, Integer pageSize) {
 
 
         Session session = null;
         Transaction tx = null;
         List<T> objs = null;
+
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            objs = (List<T>) session.createCriteria(aClass).list();
+            Criteria criteria = session.createCriteria(aClass);
+            criteria.setFirstResult((pageNumber - 1) * pageSize);
+            criteria.setMaxResults(pageSize);
+            objs = (List<T>) criteria.list();
             tx.commit();
         } catch (RuntimeException e) {
             if (tx != null) {
@@ -105,5 +114,39 @@ public class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
                 session.close();
             }
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public Long getCount(String table, Integer id) {
+
+        Session session = null;
+        Transaction tx = null;
+        Long count = null;
+        Query query;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            if (Objects.equals(table, "car")) {
+                if (id == null) {
+                    query = session.createQuery(HQL_CAR_COUNT);
+                }else {
+                    query = session.createQuery(HQL_CAR_COUNT_OF_MOTOR_SHOW);
+                    query.setParameter("id", id);
+                }
+            } else {
+                query = session.createQuery(HQL_MOTOR_SHOW_COUNT);
+            }
+            count = (Long) query.uniqueResult();
+            tx.commit();
+        } catch (RuntimeException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return count;
     }
 }

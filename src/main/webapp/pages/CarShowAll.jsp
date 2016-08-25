@@ -1,14 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<c:url value="/caredition" var="edit">--%>
-    <%--<c:param name="car" value="${car.id}"/>--%>
-<%--</c:url>--%>
-<c:url value="deletecar" var="delete">
-    <c:param name="car" value="${car.id}"/>
-</c:url>
-<c:url value="mscars" var="mshow">
-    <c:param name="motorShowId" value="${car.motorShowId}"/>
-</c:url>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,17 +26,51 @@
             <%--<a class="navbar-brand" href="#">Logo</a>--%>
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
-            <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/">Return to main</a></li>
-                <li><a href="caredition">Create car</a></li>
-                <%--<li><a href="">Punkt 3</a></li>--%>
-                <%--<li><a href="">Punkt 4</a></li>--%>
-            </ul>
+            <form class="form-inline" method="get" action="cars">
+                <ul class="nav navbar-nav col-lg">
+                    <li><a href="${pageContext.request.contextPath}/">Return to main</a></li>
+                    <li><a href="caredition">Create car</a></li>
+
+                    <li class="menu-bar-page">
+                        <button type="submit" class="btn" name="pageNumber" value="${(page.getPageNumber())-1}">
+                            Previous
+                        </button>
+                    </li>
+                    <li class="menu-bar-count">
+                        <label>
+                            <input type="text" class="pageCount" disabled="disabled"
+                                   value="${page.getPageNumber()}/${page.getPageCount()}">
+                        </label>
+                    </li>
+                    <li class="menu-bar">
+                        <button type="submit" class="btn" name="pageNumber" value="${(page.getPageNumber())+1}">Next
+                        </button>
+                    </li>
+                    <li class="menu-bar-beg">
+                        <div>
+
+                            <label>
+                                <select class="form-control" name="pageSize" size="1">
+                                    <option <c:if test="${page.pageSize eq 5}"> selected= </c:if> value="5">5</option>
+                                    <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if> value="10">10</option>
+                                    <option <c:if test="${page.pageSize eq 25}"> selected="selected" </c:if>  value="25">25</option>
+                                    <option <c:if test="${page.pageSize eq 35}"> selected="selected" </c:if> value="35">35</option>
+                                </select>
+                            </label>
+                            <button type="submit" class="btn">Apply</button>
+
+                        </div>
+                        <%--<input type="hidden" name="numberOfCarsFromHidden" value="${}">--%>
+                    </li>
+
+                    <%--<li><a href="">Punkt 4</a></li>--%>
+                </ul>
+            </form>
         </div>
     </div>
 </div>
 
-<div align="center">
+<div class="zlp1" align="center">
     <table class="table_price" cellpadding="4" cellspacing="1">
         <caption><h1>Cars</h1></caption>
         <tr>
@@ -84,6 +110,7 @@
             </tr>
         </c:forEach>
     </table>
+
     <%--<a href="/" class="c">Return to main</a>--%>
     <%--<a href="/caredition" class="c">Create car</a>--%>
 </div>

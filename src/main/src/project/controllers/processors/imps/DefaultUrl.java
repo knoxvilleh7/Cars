@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static project.constants.PageConst.START;
+import static project.constants.PagesConst.START;
 
 /**
  * Created on 15.08.2016.

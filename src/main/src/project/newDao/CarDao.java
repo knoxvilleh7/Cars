@@ -11,6 +11,6 @@ public interface CarDao extends NewDaoGenerics<Car>{
 
     Car getCarByVin(String vinCode);
 
-    List<Car> getCarsByMSId(Integer MotorShowId);
+    List<Car> getCarsByMSId(Integer MotorShowId, Integer pageNumber, Integer pageSize);
 
 }

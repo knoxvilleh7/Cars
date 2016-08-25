@@ -18,7 +18,7 @@ import java.util.List;
 
 import static project.constants.AttributeConst.*;
 import static project.constants.AttributeConst.ID;
-import static project.constants.PageConst.*;
+import static project.constants.PagesConst.*;
 
 /**
  * Created on 17.08.2016.
@@ -39,7 +39,7 @@ public class CarEdition implements RequestInterface {
             request.setAttribute(CAR, car);
             request.setAttribute(MSID, car.getMotorShowId());
         } else {
-            List<MotorShow> mShows = mShowService.getAllMotorShows();
+            List<MotorShow> mShows = mShowService.getAllMotorShowsForRegistration();
             request.setAttribute(MSHOWS, mShows);
         }
         request.getRequestDispatcher(CAREDIT).forward(request, response);

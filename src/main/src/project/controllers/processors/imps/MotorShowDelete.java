@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.PageConst.MSALLCONT;
+import static project.constants.PagesConst.MSALLCONT;
 
 /**
  * Created on 16.08.2016.
