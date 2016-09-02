@@ -1,4 +1,4 @@
-package project.sevice;
+package project.service;
 
 import project.exception.DaoException;
 import project.exception.ValidException;
@@ -17,7 +17,7 @@ public interface CarService {
 
     Car getCarById(Integer id);
 
-    Car getCarByVin(String vinCode);
+    Car getCarByVin(String VinCode);
 
     List<Car> getCars(Integer pageNumber, Integer pageSize);
 
@@ -25,5 +25,15 @@ public interface CarService {
 
     Long getCarCount();
 
+    Long getCarForSearchCount(Object  searchValue,String searchCategory);
+
+    Long getCarForSearchCountInMotorShow(Object  searchValue,String searchCategory,Integer motorShowId);
+
     Long getCarOfShowCount(Integer motorShowId);
+
+    List<Car> getCarsBySearch(Object searchValue,String searchCategory,Integer PageNumber,Integer PageSize);
+
+    List<Car> getCarsBySearchInMotorShow(Integer motorShowId, Object searchValue,String searchCategory,Integer PageNumber,Integer PageSize);
+
+
 }

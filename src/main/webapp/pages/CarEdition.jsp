@@ -22,9 +22,9 @@
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/">Return to main</a></li>
-                <li><a href="motorshows">Return to MotorShows</a></li>
-                <li><a href="cars">Return to Cars</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
+                <li><a href="motorshows">All motor shows</a></li>
+                <li><a href="cars">All cars</a></li>
                 <%--<li><a href="">Punkt 4</a></li>--%>
 
             </ul>
@@ -42,12 +42,12 @@
                 <input type="text" class="form-control" name="model" id="model" placeholder="Model"
                        value="${car.model}">
             </div>
-
-            <div>
+        </div>
+            <div class="errs">
                 ${errs.model}
             </div>
 
-        </div>
+
 
         <div class="form-group">
             <label for="productionDate" class="text-right col-sm-3" control-label>Production date:</label>
@@ -55,10 +55,11 @@
                 <input type="date" class="form-control" name="productionDate" id="productionDate"
                        placeholder="YYYY-MM-DD" value="${car.productionDate}">
             </div>
+        </div>
             <div>
                 ${errs.productionDate}
             </div>
-        </div>
+
 
         <div class="form-group">
             <label for="manufacturer" class="text-right col-sm-3" control-label>Manufacturer:</label>
@@ -66,10 +67,11 @@
                 <input type="text" class="form-control" name="manufacturer" id="manufacturer"
                        placeholder="Enter company name" value="${car.manufacturer}">
             </div>
+        </div>
             <div>
                 ${errs.manufacturer}
             </div>
-        </div>
+
 
         <div class="form-group">
             <label for="manufacturerEmail" class="text-right col-sm-3">Manufacturer E-mail:</label>
@@ -77,10 +79,11 @@
                 <input type="email" class="form-control" name="manufacturerEmail" id="manufacturerEmail"
                        placeholder="Enter E-mail" value="${car.manufacturerEmail}">
             </div>
+        </div>
             <div>
                 ${errs.manufacturerEmail}
             </div>
-        </div>
+
 
         <div class="form-group">
             <label for="price" class="text-right col-sm-3">Price:</label>
@@ -88,10 +91,11 @@
                 <input type="number" step="any" class="form-control" name="price" id="price" placeholder="Enter price"
                        value="${car.price}">
             </div>
+        </div>
             <div>
                 ${errs.price}
             </div>
-        </div>
+
 
         <div class="form-group">
             <label for="engineVolume" class="text-right col-sm-3">Engine volume:</label>
@@ -99,10 +103,11 @@
                 <input type="number" step="any" class="form-control" name="engineVolume" id="engineVolume"
                        placeholder="Enter volume of engine" value="${car.engineVolume}">
             </div>
+        </div>
             <div>
                 ${errs.engineVolume}
             </div>
-        </div>
+
 
         <div class="form-group">
             <label for="vinCode" class="text-right col-sm-3">VIN code:</label>
@@ -110,10 +115,11 @@
                 <input type="text" class="form-control" name="vinCode" id="vinCode"
                        placeholder="Enter VIN code" value="${car.vinCode}">
             </div>
+        </div>
             <div>
                 ${errs.vinCode}
             </div>
-        </div>
+
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">

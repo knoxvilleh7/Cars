@@ -2,8 +2,8 @@ package project.controllers.processors.imps;
 
 import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
-import project.sevice.MShowService;
-import project.sevice.MShowServiceImpl;
+import project.service.MotorShowService;
+import project.service.MotorShowServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -19,13 +19,17 @@ import static project.constants.PagesConst.MSEDIT;
  */
 public class MotorShowEdition implements RequestInterface {
 
-    private MShowService mShowService = new MShowServiceImpl();
+    private MotorShowService motorShowService;
+
+    public void setMotorShowService(MotorShowService motorShowService) {
+        this.motorShowService = motorShowService;
+    }
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
 
         Integer motorShowId = Util.getInteger(request, MSID);
         if (motorShowId != null) {
-            request.setAttribute(MOTORSHOW, mShowService.getMShowById(motorShowId));
+            request.setAttribute(MOTORSHOW, this.motorShowService.getMShowById(motorShowId));
         }
         request.getRequestDispatcher(MSEDIT).forward(request, response);
     }

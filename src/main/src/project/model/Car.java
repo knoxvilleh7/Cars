@@ -4,7 +4,7 @@ import net.sf.oval.constraint.*;
 import project.util.VinCheck;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 
 @Entity
@@ -13,7 +13,7 @@ import java.util.Date;
 public class Car {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name= "car_model", length=100)

@@ -1,29 +1,39 @@
+.container {
+    width: auto;
+}
+.form{
+ color: #ffffff;
+}
 .carEdition {
     height: 550px;
     margin-left: 4%;
 }
 .navbar-nav{
-    width: 1200px;
+    width: 1020px;
+}
+.search{
+    width: 290px;
 }
 .menu-bar {
-    margin-left: 5px;
-    width: 80px;
+    width: 70px;
     height: 50px;
 }
 .menu-bar-beg {
-    margin-left: 70px;
-    width: 170px;
+    width: 120px;
     height: 50px;
 }
 .menu-bar-page{
-    margin-left: 70px;
-    width: 85px;
+    margin-left: 20px;
+    width: 75px;
     height: 50px;
 }
 .menu-bar-count{
-
+    margin-left: 10px;
     width: 40px;
     height: 50px;
+}
+.bar-left{
+    width: 1000px;
 }
 .pageCount{
     width: 35px;
@@ -32,6 +42,9 @@
 .motorShowEdition {
     height: 550px;
     margin-top: 7%;
+}
+.search-ms{
+    margin-left: 20px;
 }
 
 body.carEdit {

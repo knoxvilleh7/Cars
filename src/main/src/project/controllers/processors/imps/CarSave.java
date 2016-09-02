@@ -4,10 +4,10 @@ import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.Car;
-import project.sevice.CarService;
-import project.sevice.CarServiceImpl;
-import project.sevice.MShowService;
-import project.sevice.MShowServiceImpl;
+import project.service.CarService;
+import project.service.CarServiceImpl;
+import project.service.MotorShowService;
+import project.service.MotorShowServiceImpl;
 import project.transformer.Transformer;
 import project.util.Util;
 
@@ -25,8 +25,16 @@ import static project.constants.PagesConst.CARSOFMS;
  */
 public class CarSave implements RequestInterface {
 
-    private CarService carService = new CarServiceImpl();
-    private MShowService mShowService = new MShowServiceImpl();
+    private MotorShowService motorShowService;
+    private CarService carService;
+
+    public void setMotorShowService(MotorShowService motorShowService) {
+        this.motorShowService = motorShowService;
+    }
+
+    public void setCarService(CarService carService) {
+        this.carService = carService;
+    }
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
         Car car = Transformer.getCarParam(request);
@@ -35,10 +43,10 @@ public class CarSave implements RequestInterface {
         if (m == null) {
             Integer motorShowId = Util.getInteger(request, MSIDFH);
             car.setMotorShowId(motorShowId);
-            car.setMotorShow(mShowService.getMShowById(motorShowId));
+            car.setMotorShow(motorShowService.getMShowById(motorShowId));
         } else {
             car.setMotorShowId(m);
-            car.setMotorShow(mShowService.getMShowById(m));
+            car.setMotorShow(motorShowService.getMShowById(m));
         }
         try {
             carService.saveCar(car);

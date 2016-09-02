@@ -4,9 +4,10 @@ import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
 import project.model.MotorShow;
 import project.model.Page;
-import project.sevice.MShowService;
-import project.sevice.MShowServiceImpl;
-import project.transformer.Transformer;
+import project.service.MotorShowService;
+import project.service.MotorShowServiceImpl;
+import project.service.PageService;
+import project.service.PageServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -24,32 +25,34 @@ import static project.constants.PagesConst.*;
 public class MotorShowShowAll implements RequestInterface {
 
 
-    private MShowService mShowService = new MShowServiceImpl();
+    private MotorShowService motorShowService;
+    private PageService pageService;
+
+    public void setMotorShowService(MotorShowService motorShowService) {
+        this.motorShowService = motorShowService;
+    }
+
+    public void setPageService(PageService pageService) {
+        this.pageService = pageService;
+    }
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
 
-        Page page = Transformer.getPageParam(request);
-        if (page.getPageSize() == null) {
-            page.setPageSize(DEFAULTPAGESIZE);
+
+        String searchValue = Util.getString(request, SEARCH);
+        String searchCategory = Util.getString(request, SEARCH_BY);
+        List<MotorShow> motorShows;
+        Page page;
+        if (searchValue == null && searchCategory == null) {
+            page = this.pageService.getPageForAllMotorShows(request);
+            motorShows = motorShowService.getAllMotorShows(page.getPageNumber(), page.getPageSize());
+        } else {
+            page = this.pageService.getPageForSearchMotorShows(request, searchValue, searchCategory);
+            motorShows = this.motorShowService.getMotorShowsBySearch(searchValue, searchCategory, page.getPageNumber(), page.getPageSize());
         }
-        if (page.getPageNumber() == null) {
-            page.setPageNumber(DEFAULTPAGENUMBER);
-        }
-        page.setPageCount(getNumberOfPages(mShowService.getMotorShowCount(), page.getPageSize()));
-        page.setToNext(page.getPageNumber()<page.getPageCount());
-        page.setToPrev(page.getPageNumber()>1);
-        List<MotorShow> motorShows = mShowService.getAllMotorShows(page.getPageNumber(), page.getPageSize());
         request.setAttribute(MOTORSHOW, motorShows);
         request.setAttribute(PAGE, page);
         request.getRequestDispatcher(MSALL).forward(request, response);
     }
-
-    private Long getNumberOfPages(Long MotorShows, Integer NumberOfMotorShows) {
-        Long l = (MotorShows / NumberOfMotorShows);
-        if ( MotorShows % NumberOfMotorShows != 0) {
-            l++;
-        }
-        return l;
-    }
-
 }
+

@@ -14,12 +14,12 @@ import java.util.Map;
  */
 public class ModelValidator {
 
-    Validator validator = new Validator();
+    private Validator validator = new Validator();
 
     public Map<String, List<String>> mValid(Object object) {
 
         List<ConstraintViolation> errs = validator.validate(object);
-        Map<String, List<String>> msg = new HashMap<String, List<String>>();
+        Map<String, List<String>> msg = new HashMap<>();
         if (errs.size() > 0) {
             for (ConstraintViolation cv : errs){
                 String key = (((FieldContext)cv.getContext()).getField().getName());

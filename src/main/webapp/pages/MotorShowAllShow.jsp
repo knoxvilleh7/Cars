@@ -25,51 +25,72 @@
             <%--<a class="navbar-brand" href="#">Logo</a>--%>
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
-            <form class="form-inline" method="get" action="motorshows">
-                <ul class="nav navbar-nav">
-                    <li><a href="${pageContext.request.contextPath}/">Return to main</a></li>
-                    <li><a href="caredition">Create car</a></li>
-                    <li><a href="motorshowedition">Create Motor Show</a></li>
-                    <li><a href="cars">Return to Cars</a></li>
-                    <li class="menu-bar-page">
-                        <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if> class="btn" name="pageNumber" value="${(page.getPageNumber())-1}">
-                            Previous
-                        </button>
-                    </li>
-                    <li class="menu-bar-count">
-                        <label>
-                            <input type="text" class="pageCount" disabled="disabled"
-                                   value="${page.getPageNumber()}/${page.getPageCount()}">
-                        </label>
-                    </li>
-                    <li class="menu-bar">
-                        <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if> class="btn" name="pageNumber" value="${(page.getPageNumber())+1}">Next
-                        </button>
-                    </li>
-                    <li class="menu-bar-beg">
-                        <div>
-
+            <div class="bar-left col-lg-10">
+                <form class="form-inline" method="get" action="motorshows">
+                    <ul class="nav navbar-nav">
+                        <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
+                        <li><a href="cars">All cars</a></li>
+                        <li><a href="motorshows">All motor shows</a></li>
+                        <li><a href="caredition">Create car</a></li>
+                        <li><a href="motorshowedition">Create motor Show</a></li>
+                        <li class="menu-bar-page">
+                            <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if>
+                                    class="btn btn-sm" name="pageNumber" value="${(page.getPageNumber())-1}">
+                                Previous
+                            </button>
+                        </li>
+                        <li class="menu-bar-count">
                             <label>
-                                <select class="form-control" name="pageSize" size="1">
-                                    <option <c:if test="${page.pageSize eq 5}"> selected= </c:if> value="5">5</option>
-                                    <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if> value="10">
-                                        10
-                                    </option>
-                                    <option <c:if test="${page.pageSize eq 25}"> selected="selected" </c:if> value="25">
-                                        25
-                                    </option>
-                                    <option <c:if test="${page.pageSize eq 35}"> selected="selected" </c:if> value="35">
-                                        35
-                                    </option>
-                                </select>
+                                <input type="text" class="pageCount" disabled="disabled"
+                                       value="${page.getPageNumber()}/${page.getPageCount()}">
                             </label>
-                            <button type="submit" class="btn">Apply</button>
-                        </div>
-                    </li>
+                        </li>
+                        <li class="menu-bar">
+                            <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if>
+                                    class="btn btn-sm" name="pageNumber" value="${(page.getPageNumber())+1}">Next
+                            </button>
+                        </li>
+                        <li class="menu-bar-beg">
+                            <div>
 
-                    <%--<li><a href="">Punkt 4</a></li>--%>
-                </ul>
-            </form>
+                                <label>
+                                    <select class="form-control" name="pageSize" size="1">
+                                        <option <c:if test="${page.pageSize eq 5}"> selected= </c:if> value="5">5
+                                        </option>
+                                        <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if>
+                                                value="10">
+                                            10
+                                        </option>
+                                        <option <c:if test="${page.pageSize eq 25}"> selected="selected" </c:if>
+                                                value="25">
+                                            25
+                                        </option>
+                                        <option <c:if test="${page.pageSize eq 35}"> selected="selected" </c:if>
+                                                value="35">
+                                            35
+                                        </option>
+                                    </select>
+                                </label>
+                                <button type="submit" class="btn btn-sm">Apply</button>
+                            </div>
+                        </li>
+
+                        <%--<li><a href="">Punkt 4</a></li>--%>
+                    </ul>
+                </form>
+            </div>
+            <div class="search col-lg-2">
+                <form class="form-inline search-ms" method="get" action="motorshows">
+                    <input type="text" name="search" placeholder="Search" value="">
+                    <Strong>By</Strong>
+                    <select name="searchBy">
+                        <option value="name">Motor show name</option>
+                        <option value="address">Motor show address</option>
+                    </select>
+                    <button type="submit" class="btn btn-sm">Search</button>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>

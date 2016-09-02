@@ -25,9 +25,9 @@
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/">Return to main</a></li>
-                <li><a href="motorshows">Return to MotorShows</a></li>
-                <li><a href="cars">Return to Cars</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
+                <li><a href="motorshows">All motor shows</a></li>
+                <li><a href="cars">All cars</a></li>
                 <%--<li><a href="">Punkt 4</a></li>--%>
 
             </ul>
@@ -36,26 +36,28 @@
 </div>
 
 <div class="motorShowEdition  col-lg-8">
-    <form class="form" method="post" action="/mssave">
+    <form class="form" method="post" action="mssave">
         <div class="form-group">
             <label for="name" class="text-right col-sm-3">Motor show name:</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="name" id="name" value="${motorShow.name}">
             </div>
+        </div>
             <div class="col-sm-offset-4">
                 ${errs.name}
             </div>
-        </div>
+
 
         <div class="form-group">
             <label for="address" class="text-right col-sm-3">Motor show address:</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="address" id="address" value="${motorShow.address}">
             </div>
+        </div>
             <div class="col-sm-offset-4">
                 ${errs.address}
             </div>
-        </div>
+
         <div class="col-sm-offset-6">
             <button type="submit" class="btn">Submit</button>
         </div>

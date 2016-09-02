@@ -16,4 +16,6 @@ public class AttributeConst {
     public static final String MSIDFS = "motorShowIdFromSelect";
     public static final String MSIDFH = "motorShowIdFromHidden";
     public static final String PAGE = "page";
+    public static final String SEARCH = "search";
+    public static final String SEARCH_BY = "searchBy";
 }

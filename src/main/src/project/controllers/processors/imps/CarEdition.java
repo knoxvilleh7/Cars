@@ -4,10 +4,10 @@ import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
 import project.model.Car;
 import project.model.MotorShow;
-import project.sevice.CarService;
-import project.sevice.CarServiceImpl;
-import project.sevice.MShowService;
-import project.sevice.MShowServiceImpl;
+import project.service.CarService;
+import project.service.CarServiceImpl;
+import project.service.MotorShowService;
+import project.service.MotorShowServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -20,12 +20,18 @@ import static project.constants.AttributeConst.*;
 import static project.constants.AttributeConst.ID;
 import static project.constants.PagesConst.*;
 
-/**
- * Created on 17.08.2016.
- */
 public class CarEdition implements RequestInterface {
-    private MShowService mShowService = new MShowServiceImpl();
-    private CarService carService = new CarServiceImpl();
+
+    private MotorShowService motorShowService;
+    private CarService carService;
+
+    public void setMotorShowService(MotorShowService motorShowService) {
+        this.motorShowService = motorShowService;
+    }
+
+    public void setCarService(CarService carService) {
+        this.carService = carService;
+    }
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
         Integer motorShowId = Util.getInteger(request, MSID);
@@ -34,12 +40,12 @@ public class CarEdition implements RequestInterface {
             request.setAttribute(MSID, motorShowId);
         }
         if (id != null) {
-            Car car = carService.getCarById(id);
+            Car car = this.carService.getCarById(id);
             request.setAttribute(ID, id);
             request.setAttribute(CAR, car);
             request.setAttribute(MSID, car.getMotorShowId());
         } else {
-            List<MotorShow> mShows = mShowService.getAllMotorShowsForRegistration();
+            List<MotorShow> mShows = this.motorShowService.getAllMotorShowsForRegistration();
             request.setAttribute(MSHOWS, mShows);
         }
         request.getRequestDispatcher(CAREDIT).forward(request, response);

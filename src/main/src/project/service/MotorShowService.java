@@ -1,6 +1,5 @@
-package project.sevice;
+package project.service;
 
-import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.MotorShow;
 
@@ -9,7 +8,7 @@ import java.util.List;
 /**
  * Created on 15.08.2016.
  */
-public interface MShowService {
+public interface MotorShowService {
 
     void mShowSave(MotorShow motorShow) throws ValidException;
 
@@ -22,5 +21,11 @@ public interface MShowService {
     List<MotorShow> getAllMotorShowsForRegistration();
 
     Long getMotorShowCount();
+
+    Long getMotorShowForSearchCount(Object  searchValue, String searchCategory);
+
+    List<MotorShow> getMotorShowsBySearch(Object searchValue,String searchCategory,Integer PageNumber,Integer PageSize);
+
+
 
 }

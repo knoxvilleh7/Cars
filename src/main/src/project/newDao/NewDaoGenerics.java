@@ -2,9 +2,7 @@ package project.newDao;
 
 import java.util.List;
 
-/**
- * Created on 23.08.2016.
- */
+
 public interface NewDaoGenerics<T> {
 
     String HQL_CAR_COUNT = "select count (*) from Car car";
@@ -20,4 +18,8 @@ public interface NewDaoGenerics<T> {
     void deleteById(T obj);
 
     Long getCount(String table, Integer id);
+
+    Long getCountForSearch(Object  searchValue,String searchCategory, Integer id);
+
+    List<T> getObjectsForSearch(Integer id, Object searchValue, String searchCategory, Integer pageNumber, Integer pageSize);
 }

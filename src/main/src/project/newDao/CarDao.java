@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface CarDao extends NewDaoGenerics<Car>{
 
-    Car getCarByVin(String vinCode);
-
     List<Car> getCarsByMSId(Integer MotorShowId, Integer pageNumber, Integer pageSize);
+
+    Car getByVin(String VinCode);
 
 }

@@ -2,8 +2,8 @@ package project.controllers.processors.imps;
 
 import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
-import project.sevice.CarService;
-import project.sevice.CarServiceImpl;
+import project.service.CarService;
+import project.service.CarServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -20,12 +20,16 @@ import static project.constants.PagesConst.CARSOFMS;
  */
 public class CarDelete implements RequestInterface {
 
-    private CarService carService = new CarServiceImpl();
+    private CarService carService;
+
+    public void setCarService(CarService carService) {
+        this.carService = carService;
+    }
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
 
 
-        carService.deleteCar(Util.getInteger(request, CAR));
+        this.carService.deleteCar(Util.getInteger(request, CAR));
         response.sendRedirect(CARSOFMS + Util.getInteger(request, MSID));
     }
 

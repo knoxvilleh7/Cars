@@ -4,8 +4,8 @@ import project.controllers.processors.RequestInterface;
 import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.MotorShow;
-import project.sevice.MShowService;
-import project.sevice.MShowServiceImpl;
+import project.service.MotorShowService;
+import project.service.MotorShowServiceImpl;
 import project.transformer.Transformer;
 
 import javax.servlet.ServletException;
@@ -20,13 +20,17 @@ import static project.constants.PagesConst.*;
  * Created on 16.08.2016.
  */
 public class MotorShowSave implements RequestInterface {
-    private MotorShow motorShow = new MotorShow();
-    private MShowService mShowService = new MShowServiceImpl();
+
+    private MotorShowService motorShowService;
+
+    public void setMotorShowService(MotorShowService motorShowService) {
+        this.motorShowService = motorShowService;
+    }
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
-        motorShow = Transformer.getMotorShowParams(request);
+        MotorShow motorShow = Transformer.getMotorShowParams(request);
         try {
-            mShowService.mShowSave(motorShow);
+            motorShowService.mShowSave(motorShow);
             response.sendRedirect(MSALLCONT);
         } catch (ValidException validException) {
 

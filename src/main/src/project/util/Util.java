@@ -54,4 +54,15 @@ public class Util {
         }
         return result;
     }
+
+//    public static Date convertSqlToUtilDate(java.sql.Date date){
+//
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        java.util.Date result = null;
+//        try{
+//            result = ;
+//        }catch (Exception ignored) {}
+//        return result;
+//    }
+
 }

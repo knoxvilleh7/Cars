@@ -1,135 +1,99 @@
 package project.newDao;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import project.util.HibernateUtil;
+import org.hibernate.*;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+//import org.slf4j.//logger.*
+//import org.slf4j.//logger.*
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
-/**
- * Created on 23.08.2016.
- */
-public class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
+@Repository
+class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
 
-    protected Class aClass;
+    protected SessionFactory sessionFactory;
 
-    public NewDaoGenericsImpl(Class aClass) {
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    Class aClass;
+
+    NewDaoGenericsImpl(Class aClass) {
         this.aClass = aClass;
     }
+//    private final //logger.*
 
     @Override
     public void saveOrUpdate(T obj) {
-        Session session = null;
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
             session.saveOrUpdate(obj);
-            tx.commit();
-        } catch (RuntimeException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+//            //logger.*
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 
     @Override
     @SuppressWarnings("unchecked")
     public T getById(Integer id) {
 
-        Session session = null;
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
         T obj = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
             obj = (T) session.get(aClass, id);
-            tx.commit();
-        } catch (RuntimeException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+//            //logger.*
+        } catch (RuntimeException ignored) {
         }
         return obj;
     }
-
 
     @Override
     @SuppressWarnings("unchecked")
     public List<T> getAll(Integer pageNumber, Integer pageSize) {
 
 
-        Session session = null;
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
+
         List<T> objs = null;
 
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(aClass);
             criteria.setFirstResult((pageNumber - 1) * pageSize);
             criteria.setMaxResults(pageSize);
             objs = (List<T>) criteria.list();
-            tx.commit();
-        } catch (RuntimeException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            //logger.*
+        } catch (RuntimeException ignored) {
         }
         return objs;
     }
 
     @Override
     public void deleteById(T obj) {
-        Session session = null;
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
             session.delete(obj);
-            tx.commit();
-        } catch (RuntimeException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            //logger.*
+        } catch (RuntimeException ignored) {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public Long getCount(String table, Integer id) {
-
-        Session session = null;
-        Transaction tx = null;
-        Long count = null;
         Query query;
+        Long count = null;
+        Session session = sessionFactory.getCurrentSession();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
             if (Objects.equals(table, "car")) {
                 if (id == null) {
                     query = session.createQuery(HQL_CAR_COUNT);
-                }else {
+                } else {
                     query = session.createQuery(HQL_CAR_COUNT_OF_MOTOR_SHOW);
                     query.setParameter("id", id);
                 }
@@ -137,16 +101,45 @@ public class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
                 query = session.createQuery(HQL_MOTOR_SHOW_COUNT);
             }
             count = (Long) query.uniqueResult();
-            tx.commit();
-        } catch (RuntimeException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+        } catch (RuntimeException ignored) {
         }
         return count;
     }
+
+    public Long getCountForSearch(Object searchValue, String searchCategory, Integer id) {
+        Long count = null;
+        Criteria criteria;
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            criteria = session.createCriteria(aClass);
+            if (id != null) {
+                criteria.add(Restrictions.like("motorShowId", id));
+            }
+            criteria.add(Restrictions.like(searchCategory, searchValue));
+            criteria.setProjection(Projections.rowCount());
+            count = (Long) criteria.uniqueResult();
+            //logger.*
+        } catch (RuntimeException ignored) {
+        }
+        return count;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> getObjectsForSearch(Integer id, Object searchValue, String searchCategory, Integer pageNumber, Integer pageSize) {
+        List<T> objs = null;
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            Criteria criteria = session.createCriteria(aClass).add(Restrictions.like(searchCategory, searchValue));
+            if (id != null) {
+                criteria.add(Restrictions.like("motorShowId", id));
+            }
+            criteria.setFirstResult((pageNumber - 1) * pageSize);
+            criteria.setMaxResults(pageSize);
+            objs = criteria.list();
+            //logger.*
+        } catch (RuntimeException ignored) {
+        }
+        return objs;
+    }
 }
+
