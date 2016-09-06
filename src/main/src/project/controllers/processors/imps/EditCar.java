@@ -3,6 +3,7 @@ package project.controllers.processors.imps;
 import project.controllers.processors.RequestInterface;
 import project.dao.MotorShowDao;
 import project.dao.MotorShowDaoImpl;
+import project.exception.DaoException;
 import project.model.Car;
 import project.model.MotorShow;
 import project.sevice.CarService;
@@ -21,9 +22,9 @@ import java.util.List;
 public class EditCar implements RequestInterface {
     private Car car = new Car();
     private CarService carService = new CarServiceImpl();
-    private List<MotorShow> mShows = new ArrayList<MotorShow>();
+    private List<MotorShow> mShows = new ArrayList<>();
     private MotorShowDao motorShowDao = new MotorShowDaoImpl();
-    public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
         String i = request.getParameter("car");
         int id = Integer.parseInt(i);
         car = carService.getCarById(id);
