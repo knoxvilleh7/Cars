@@ -1,5 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<jsp:useBean id="msid" scope="request" type="java.lang.Integer"/>
+<jsp:useBean id="cars" scope="request" type="java.util.List"/>
+
+<c:set var="urlEdit" value="/caredition"/>
+<c:set var="urlDelete" value="/deletecar"/>
+<c:set var="urlCarEdition" value="/caredition"/>
+<c:set var="urlMotorShows" value="/motorshows"/>
+<c:set var="urlCars" value="/cars"/>
+<c:set var="urlMain" value="/"/>
+
+<c:url value="${urlCarEdition}" var="carEdition">
+    <c:param name="MS" value="${msid}"/>
+</c:url>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     <title>Available cars</title>
 </head>
 <body>
@@ -25,10 +39,10 @@
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="/" >Return to main</a></li>
-                <li><a href="/caredition?MS=${msid}" >Create Car</a></li>
-                <li><a href="/motorshows" >Return to Motor Shows</a></li>
-                <li><a href="/cars">Return to Cars</a></li>
+                <li><a href="${urlMain}">Return to main</a></li>
+                <li><a href="${carEdition}">Create Car</a></li>
+                <li><a href="${urlMotorShows}">Return to Motor Shows</a></li>
+                <li><a href="${urlCars}">Return to Cars</a></li>
             </ul>
         </div>
     </div>
@@ -58,30 +72,23 @@
                 <td><c:out value="${car.vinCode}"/></td>
                 <td>
                     <div>
-                        <c:url value="/caredition" var="edit">
+                        <c:url value="${urlEdit}" var="edit">
                             <c:param name="car" value="${car.id}"/>
                         </c:url>
-                        <a href=" <c:out value="${edit}"/>" id="editlink">Edit</a>
+                        <a href="${edit}">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <c:url value="/deletecar" var="delete">
+                        <c:url value="${urlDelete}" var="delete">
                             <c:param name="car" value="${car.id}"/>
                         </c:url>
-                        <a href=" <c:out value="${delete}"/>" id="deletelink">Delete</a>
+                        <a href="${delete}">Delete</a>
                     </div>
                 </td>
             </tr>
         </c:forEach>
     </table>
-
-    <%--<a href="/caredition?MS=${msid}" class="c">Create Car</a>--%>
-    <%--<a href="/motorshows" class="c">Return to Motor Shows</a>--%>
-    <%--<a href="/" class="c">Return to main</a><br>--%>
-    <%--<a href="/cars" class="c">Return to Cars</a><br>--%>
-    </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
+</div>
 </body>
 </html>
