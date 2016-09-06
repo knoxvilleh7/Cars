@@ -1,6 +1,7 @@
 package project.controllers.processors.imps;
 
 import project.controllers.processors.RequestInterface;
+import project.exception.DaoException;
 import project.model.MotorShow;
 import project.sevice.MShowService;
 import project.sevice.MShowServiceImpl;
@@ -16,7 +17,7 @@ import java.io.IOException;
 public class EditShow implements RequestInterface {
     private MotorShow motorShow = new MotorShow();
     private MShowService mShowService = new MShowServiceImpl();
-    public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
         String i = request.getParameter("MS");
         int mid = Integer.parseInt(i);
         motorShow = mShowService.getMShowById(mid);

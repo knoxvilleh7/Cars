@@ -3,6 +3,7 @@ package project.controllers.processors.imps;
 import project.controllers.processors.RequestInterface;
 import project.dao.MotorShowDao;
 import project.dao.MotorShowDaoImpl;
+import project.exception.DaoException;
 import project.model.MotorShow;
 
 import javax.servlet.ServletException;
@@ -16,9 +17,9 @@ import java.util.List;
  * Created on 16.08.2016.
  */
 public class CreateCar implements RequestInterface {
-    private List<MotorShow> mShows = new ArrayList<MotorShow>();
+    private List<MotorShow> mShows = new ArrayList<>();
     private MotorShowDao motorShowDao = new MotorShowDaoImpl();
-    public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
         if (request.getParameterMap().isEmpty()) {
             mShows = motorShowDao.getMotorShows();
             request.setAttribute("shows", mShows);
