@@ -1,11 +1,11 @@
 package project.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.newDao.MotorShowDao;
-import project.newDao.MotorShowDaoImpl;
 import project.exception.ValidException;
 import project.model.MotorShow;
+import project.newDao.MotorShowDao;
 import project.util.ModelValidator;
 
 import java.util.List;
@@ -17,13 +17,14 @@ import static project.constants.AttributeConst.MOTORSHOW;
 @Transactional
 public class MotorShowServiceImpl implements MotorShowService {
 
-    private MotorShowDao motorShowDao;
-
-    public void setMotorShowDao(MotorShowDao motorShowDao) {
-        this.motorShowDao = motorShowDao;
-    }
+    private final MotorShowDao motorShowDao;
 
     private ModelValidator mv = new ModelValidator();
+
+    @Autowired
+    public MotorShowServiceImpl(MotorShowDao motorShowDao) {
+        this.motorShowDao = motorShowDao;
+    }
 
     public void mShowSave(MotorShow motorShow) throws ValidException{
         Map<String, List<String>> errs = mv.mValid(motorShow);
@@ -35,18 +36,18 @@ public class MotorShowServiceImpl implements MotorShowService {
     }
 
     public MotorShow getMShowById(Integer id){
-        return this.motorShowDao.getById(id);
+        return motorShowDao.getById(id);
     }
 
     public void delete(Integer id){
-        this.motorShowDao.deleteById(this.motorShowDao.getById(id));
+        motorShowDao.delete(motorShowDao.getById(id));
     }
 
     public List<MotorShow> getAllMotorShows(Integer pageNumber, Integer pageSize){
         return motorShowDao.getAll(pageNumber, pageSize);
     }
 
-    public List<MotorShow> getAllMotorShowsForRegistration() {return this.motorShowDao.getAllMotorShowsForRegistration();
+    public List<MotorShow> getAllMotorShowsForRegistration() {return motorShowDao.getAllMotorShowsForRegistration();
     }
 
     public Long getMotorShowCount() {
@@ -54,11 +55,11 @@ public class MotorShowServiceImpl implements MotorShowService {
     }
 
     public Long getMotorShowForSearchCount(Object searchValue, String searchCategory) {
-        return this.motorShowDao.getCountForSearch(searchValue,searchCategory, null);
+        return motorShowDao.getCountForSearch(searchValue,searchCategory, null);
     }
 
     public List<MotorShow> getMotorShowsBySearch(Object searchValue, String searchCategory, Integer PageNumber, Integer PageSize) {
-        return this.motorShowDao.getObjectsForSearch(null, searchValue, searchCategory, PageNumber, PageSize);
+        return motorShowDao.getObjectsForSearch(null, searchValue, searchCategory, PageNumber, PageSize);
     }
 
 }

@@ -1,17 +1,14 @@
 package project.service;
 
-import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.Car;
 
 import java.util.List;
 
-/**
- * Created on 15.08.2016.
- */
+
 public interface CarService {
 
-    void saveCar(Car car) throws ValidException, DaoException;
+    void saveCar(Car car) throws ValidException;
 
     List<Car> getCarsByMSId(Integer motorShowId, Integer pageNumber, Integer pageSize);
 

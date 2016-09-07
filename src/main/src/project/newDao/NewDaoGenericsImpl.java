@@ -1,44 +1,44 @@
 package project.newDao;
 
-import org.hibernate.*;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-//import org.slf4j.//logger.*
-//import org.slf4j.//logger.*
-import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
-@Repository
+//import org.slf4j.//logger.*
+//import org.slf4j.//logger.*
+
+@Transactional
 class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
 
-    protected SessionFactory sessionFactory;
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+    SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+//    public SessionFactory getSessionFactory() {
+//        return sessionFactory;
+//    }
+//
+//    public void setSessionFactory(SessionFactory sessionFactory) {
+//        this.sessionFactory = sessionFactory;
+//    }
 
-    Class aClass;
+    private Class aClass;
 
     NewDaoGenericsImpl(Class aClass) {
         this.aClass = aClass;
     }
-//    private final //logger.*
+
 
     @Override
     public void saveOrUpdate(T obj) {
-        Session session = sessionFactory.getCurrentSession();
-        try {
-            session.saveOrUpdate(obj);
-//            //logger.*
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        sessionFactory.getCurrentSession().saveOrUpdate(obj);
+
     }
 
     @Override
@@ -76,12 +76,15 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
     }
 
     @Override
-    public void deleteById(T obj) {
+    public void delete(T obj) {
+
         Session session = sessionFactory.getCurrentSession();
+
         try {
             session.delete(obj);
             //logger.*
-        } catch (RuntimeException ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

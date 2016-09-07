@@ -5,10 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="js/local/html5shiv.min.js"></script>
-    <script src="js/local/respond.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 
     <title>Create or edit motor show</title>
 </head>
@@ -25,9 +23,10 @@
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
-                <li><a href="motorshows">All motor shows</a></li>
-                <li><a href="cars">All cars</a></li>
+                <li><a href="/main">Main page</a></li>
+                <li><a href="/car/list">All cars</a></li>
+                <li><a href="/motor_show/list">All motor shows</a></li>
+
                 <%--<li><a href="">Punkt 4</a></li>--%>
 
             </ul>
@@ -36,7 +35,7 @@
 </div>
 
 <div class="motorShowEdition  col-lg-8">
-    <form class="form" method="post" action="mssave">
+    <form class="form" method="post" action="/motor_show/save">
         <div class="form-group">
             <label for="name" class="text-right col-sm-3">Motor show name:</label>
             <div class="col-sm-9">
@@ -65,12 +64,6 @@
         <div>
             <input type="hidden" name="id" value="${motorShow.id}">
         </div>
-        <%--<div>--%>
-        <%--<a href="/" class="c">Return to main</a><br>--%>
-        <%--<a href="/motorshows"class="c">Return to MotorShows</a><br>--%>
-        <%--<a href="/cars" class="c">Return to Cars</a><br>--%>
-        <%--</div>--%>
-
     </form>
 </div>
 </body>

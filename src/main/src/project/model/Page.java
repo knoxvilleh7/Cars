@@ -11,15 +11,6 @@ public class Page {
     private Boolean toNext;
     private Boolean toPrev;
 
-
-    public Page(Integer pageNumber, Long pageCount, Integer pageSize, Boolean toNext, Boolean toPrev) {
-        this.pageNumber = pageNumber;
-        this.pageCount = pageCount;
-        this.pageSize = pageSize;
-        this.toNext = toNext;
-        this.toPrev = toPrev;
-    }
-
     public Page() {
     }
 
@@ -62,4 +53,5 @@ public class Page {
     public void setToPrev(Boolean toPrev) {
         this.toPrev = toPrev;
     }
+
 }

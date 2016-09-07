@@ -1,6 +1,9 @@
 .container {
     width: auto;
 }
+.select{
+    color: #0f0f0f;
+}
 .form{
  color: #ffffff;
 }
@@ -136,9 +139,10 @@ body.motorShowEdit {
 }
 
 .table_price th {
+    vertical-align: top;
     text-align: left;
     font-size: 18px;
-    width: 135px;
+    width: 110px;
 }
 
 .table_price tr:nth-child(2n) {
@@ -152,8 +156,8 @@ body.motorShowEdit {
 .table_price a {
     display: inline-block;
     padding: 5px 10px;
-    background: #F79361;
-    box-shadow: 2px 2px 0 0 #a22800;
+    background: #36f76b;
+    box-shadow: 2px 2px 0 0 #000000;
     position: relative;
 }
 

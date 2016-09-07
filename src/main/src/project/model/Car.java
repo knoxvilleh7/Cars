@@ -1,10 +1,12 @@
 package project.model;
 
 import net.sf.oval.constraint.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import project.util.VinCheck;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 
 @Entity
@@ -43,13 +45,6 @@ public class Car {
     @Email (message = "E-mail is not real")
     private String manufacturerEmail;
 
-    @Column(name= "motor_show_id", insertable = false, updatable = false)
-
-    @NotNull(message = "Field is empty")
-    @NotEmpty(message = "Field is empty")
-    @Min(value = 0, message = "Negative value")
-    private Integer motorShowId;
-
     @Column(name= "car_price")
 
     @NotNull(message = "Field is empty")
@@ -71,25 +66,10 @@ public class Car {
     @CheckWith(value = VinCheck.class, message = "Car already exists")
     private String vinCode;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "motor_show_id")
     private MotorShow motorShow;
-
-    public Car(String model, Date productionDate, String manufacturer, String manufacturerEmail, Integer motorShowId,
-               Double price, Double engineVolume, String vinCode, MotorShow motorShow) {
-        this.model = model;
-        this.productionDate = productionDate;
-        this.manufacturer = manufacturer;
-        this.manufacturerEmail = manufacturerEmail;
-        this.motorShowId = motorShowId;
-        this.price = price;
-        this.engineVolume = engineVolume;
-        this.vinCode = vinCode;
-        this.motorShow = motorShow;
-    }
-
-    public Car() {
-    }
 
     public String getModel() {
         return model;
@@ -121,14 +101,6 @@ public class Car {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getMotorShowId() {
-        return motorShowId;
-    }
-
-    public void setMotorShowId(Integer motorShowId) {
-        this.motorShowId = motorShowId;
     }
 
     public String getManufacturer() {

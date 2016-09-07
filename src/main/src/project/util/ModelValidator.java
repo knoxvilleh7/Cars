@@ -3,15 +3,14 @@ package project.util;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
 import net.sf.oval.context.FieldContext;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created on 16.08.2016.
- */
+@Component
 public class ModelValidator {
 
     private Validator validator = new Validator();
@@ -25,7 +24,7 @@ public class ModelValidator {
                 String key = (((FieldContext)cv.getContext()).getField().getName());
                 List<String> list = msg.get(key);
                 if(list ==null){
-                    list = new ArrayList<String>();
+                    list = new ArrayList<>();
                     list.add(cv.getMessage());
                 }else{
                     list.add(cv.getMessage());

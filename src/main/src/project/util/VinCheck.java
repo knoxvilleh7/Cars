@@ -2,13 +2,9 @@ package project.util;
 
 import net.sf.oval.constraint.CheckWithCheck;
 import project.model.Car;
-import project.newDao.CarDao;
 import project.service.CarService;
-import project.service.CarServiceImpl;
 
-/**
- * Created on 16.08.2016.
- */
+
 public class VinCheck implements CheckWithCheck.SimpleCheck {
 
     private CarService dao = SpringUtils.getBean(CarService.class);

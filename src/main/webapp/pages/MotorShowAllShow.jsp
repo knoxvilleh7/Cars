@@ -6,11 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="js/local/html5shiv.min.js"></script>
-    <script src="js/local/respond.min.js"></script>
-
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <title>Motor Shows.</title>
 </head>
 <body>
@@ -22,32 +19,31 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <%--<a class="navbar-brand" href="#">Logo</a>--%>
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <div class="bar-left col-lg-10">
-                <form class="form-inline" method="get" action="motorshows">
+                <form class="form-inline" method="get" action="/motor_show/list">
                     <ul class="nav navbar-nav">
-                        <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
-                        <li><a href="cars">All cars</a></li>
-                        <li><a href="motorshows">All motor shows</a></li>
-                        <li><a href="caredition">Create car</a></li>
-                        <li><a href="motorshowedition">Create motor Show</a></li>
+                        <li><a href="/main">Main page</a></li>
+                        <li><a href="/car/list">All cars</a></li>
+                        <li><a href="/motor_show/list">All motor shows</a></li>
+                        <li><a href="/car/add">Create car</a></li>
+                        <li><a href="/motor_show/add">Create motor Show</a></li>
                         <li class="menu-bar-page">
                             <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.getPageNumber())-1}">
+                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)-1}">
                                 Previous
                             </button>
                         </li>
                         <li class="menu-bar-count">
                             <label>
                                 <input type="text" class="pageCount" disabled="disabled"
-                                       value="${page.getPageNumber()}/${page.getPageCount()}">
+                                       value="${page.pageNumber}/${page.pageCount}">
                             </label>
                         </li>
                         <li class="menu-bar">
                             <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.getPageNumber())+1}">Next
+                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)+1}">Next
                             </button>
                         </li>
                         <li class="menu-bar-beg">
@@ -55,7 +51,9 @@
 
                                 <label>
                                     <select class="form-control" name="pageSize" size="1">
-                                        <option <c:if test="${page.pageSize eq 5}"> selected= </c:if> value="5">5
+                                        <option <c:if test="${page.pageSize eq 5}"> selected="selected" </c:if>
+                                                value="5">
+                                            5
                                         </option>
                                         <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if>
                                                 value="10">
@@ -80,13 +78,15 @@
                 </form>
             </div>
             <div class="search col-lg-2">
-                <form class="form-inline search-ms" method="get" action="motorshows">
-                    <input type="text" name="search" placeholder="Search" value="">
+                <form class="form-inline search-ms" method="get" action="/motor_show/list">
+                    <input type="text" name="searchValue" placeholder="Search" value="">
                     <Strong>By</Strong>
-                    <select name="searchBy">
-                        <option value="name">Motor show name</option>
-                        <option value="address">Motor show address</option>
-                    </select>
+                    <label>
+                        <select name="searchCategory">
+                            <option value="name">Motor show name</option>
+                            <option value="address">Motor show address</option>
+                        </select>
+                    </label>
                     <button type="submit" class="btn btn-sm">Search</button>
 
                 </form>
@@ -104,23 +104,23 @@
             <th>Name</th>
             <th>Address</th>
         </tr>
-        <c:forEach var="MS" items="${motorShow}">
+        <c:forEach var="MS" items="${motorShows}">
             <tr>
                 <td><c:out value="${MS.name}"/></td>
                 <td><c:out value="${MS.address}"/></td>
                 <td>
                     <div>
-                        <a href="motorshowedition?motorShowId=${MS.id}">Edit</a>
+                        <a href="/motor_show/edit/${MS.id}">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="deleteshow?motorShowId=${MS.id}">Delete</a>
+                        <a href="/motor_show/delete/${MS.id}">Delete</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="mscars?motorShowId=${MS.id}">Show cars</a>
+                        <a href="/motor_show/cars/${MS.id}">Show cars</a>
                     </div>
                 </td>
             </tr>
@@ -131,7 +131,5 @@
     <%--<a href="/caredition" class="c">Create Car</a>--%>
     <%--<a href="/cars" class="c">Return to Cars</a><br>--%>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
 </body>
 </html>

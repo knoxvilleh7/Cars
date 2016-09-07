@@ -8,10 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="js/local/html5shiv.min.js"></script>
-    <script src="js/local/respond.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <title>All cars</title>
 
 </head>
@@ -24,31 +22,30 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <%--<a class="navbar-brand" href="#">Logo</a>--%>
         </div>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <div class="bar-left col-lg-10">
-                <form class="form-inline" method="get" action="cars">
+                <form class="form-inline" method="get" action="/car/list">
                     <ul class="nav navbar-nav">
-                        <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
-                        <li><a href="motorshows">All motor shows</a></li>
-                        <li><a href="caredition">Create car</a></li>
+                        <li><a href="/main">Main page</a></li>
+                        <li><a href="/motor_show/list">All motor shows</a></li>
+                        <li><a href="/car/add">Create car</a></li>
 
                         <li class="menu-bar-page">
                             <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.getPageNumber())-1}">
+                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)-1}">
                                 Previous
                             </button>
                         </li>
                         <li class="menu-bar-count">
                             <label>
                                 <input type="text" class="pageCount" disabled="disabled"
-                                       value="${page.getPageNumber()}/${page.getPageCount()}">
+                                       value="${page.pageNumber}/${page.pageCount}">
                             </label>
                         </li>
                         <li class="menu-bar">
                             <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.getPageNumber())+1}">Next
+                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)+1}">Next
                             </button>
                         </li>
                         <li class="menu-bar-beg">
@@ -56,7 +53,9 @@
 
                                 <label>
                                     <select class="form-control" name="pageSize" size="1">
-                                        <option <c:if test="${page.pageSize eq 5}"> selected= </c:if> value="5">5
+                                        <option <c:if test="${page.pageSize eq 5}"> selected= "selected"</c:if>
+                                                value="5">
+                                            5
                                         </option>
                                         <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if>
                                                 value="10">
@@ -73,28 +72,27 @@
                                     </select>
                                 </label>
                                 <button type="submit" class="btn btn-sm">Apply</button>
-
                             </div>
-                            <%--<input type="hidden" name="numberOfCarsFromHidden" value="${}">--%>
                         </li>
-
-                        <%--<li><a href="">Punkt 4</a></li>--%>
                     </ul>
                 </form>
             </div>
             <div class="search col-lg-2">
-                <form class="form-inline" method="get" action="cars">
-                    <input type="text" name="search" placeholder="Search" value="">
+                <form class="form-inline" method="get" action="/car_list">
+                    <input type="text" name="searchValue" placeholder="Search" value="">
                     <Strong>By</Strong>
-                    <select name="searchBy">
-                        <option value="model">Car model</option>
-                        <option value="productionDate">Car production date</option>
-                        <option value="manufacturer">Car manufacturer</option>
-                        <option value="manufacturerEmail">Car manufacturer e-mail</option>
-                        <option value="price">Car price</option>
-                        <option value="engineVolume">Car engine volume</option>
-                        <option value="vinCode">Car VIN code</option>
-                    </select>
+                    <label>
+                        <select name="searchCategory">
+                            <option value="model">Car model</option>
+                            <option value="productionDate">Car production date</option>
+                            <option value="manufacturer">Car manufacturer</option>
+                            <option value="manufacturerEmail">Car manufacturer e-mail</option>
+                            <option value="price">Car price</option>
+                            <option value="engineVolume">Car engine volume</option>
+                            <option value="vinCode">Car VIN code</option>
+                            <option value="motorShow.name">Motor Show</option>
+                        </select>
+                    </label>
                     <button type="submit" class="btn btn-sm">Search</button>
 
                 </form>
@@ -103,9 +101,9 @@
     </div>
 </div>
 
-<div class="zlp1" align="center">
+<div class="m" align="center">
     <table class="table_price" cellpadding="4" cellspacing="1">
-        <caption><h1>Cars</h1></caption>
+        <caption><h1>All cars</h1></caption>
         <tr>
             <th>Model</th>
             <th>Production date</th>
@@ -114,41 +112,42 @@
             <th>Price</th>
             <th>Engine volume</th>
             <th>VIN code</th>
+            <th>Motor Show</th>
         </tr>
         <c:forEach var="car" items="${cars}">
             <tr>
                 <td>${car.model}</td>
-                <%--<td><fmt:formatDate value="${car.productionDate}" pattern="yyyy-MM-dd"/></td>--%>
                 <td>${car.productionDate}</td>
                 <td>${car.manufacturer}</td>
                 <td>${car.manufacturerEmail}</td>
                 <td>${car.price}</td>
                 <td>${car.engineVolume}</td>
                 <td>${car.vinCode}</td>
+                <td>${car.motorShow.name}</td>
                 <td>
                     <div>
-                        <a href="caredition?car=${car.id}">Edit</a>
+                        <a href="/car/copy/${car.id}">Copy</a>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <a href="/car/edit/${car.id}">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
 
-                        <a href="deletecar?car=${car.id}">Delete</a>
+                        <a href="/car/delete/${car.id}/${car.motorShow.id}">Delete</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="mscars?motorShowId=${car.motorShowId}">To Motor Show</a>
+                        <a href="motor_show/cars/${car.motorShow.id}">To Motor Show</a>
                     </div>
                 </td>
             </tr>
         </c:forEach>
     </table>
-
-    <%--<a href="/" class="c">Return to main</a>--%>
-    <%--<a href="/caredition" class="c">Create car</a>--%>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
 </body>
 </html>

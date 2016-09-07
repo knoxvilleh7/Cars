@@ -2,34 +2,34 @@ package project.newDao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import project.model.MotorShow;
 
 import java.util.List;
 
-@Repository
+@Component
+@Transactional
 public class MotorShowDaoImpl extends NewDaoGenericsImpl<MotorShow> implements MotorShowDao {
 
-    public MotorShowDaoImpl(Class aClass) {
-        super(aClass);
+    public MotorShowDaoImpl() {
+        super(MotorShow.class);
     }
-
+    @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(MotorShowDao.class);
+//    private static final Logger logger = LoggerFactory.getLogger(MotorShowDao.class);
 
     @SuppressWarnings("unchecked")
     public List<MotorShow> getAllMotorShowsForRegistration() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         List<MotorShow> objs = null;
         try {
-            objs = (List<MotorShow>) session.createCriteria(aClass).list();
-            logger.info("List of motorShows successfully loaded="+objs);
+            objs = (List<MotorShow>) session.createCriteria(MotorShow.class).list();
+//            logger.info("List of motorShows successfully loaded="+objs);
 
         } catch (RuntimeException ignored) {
         }
