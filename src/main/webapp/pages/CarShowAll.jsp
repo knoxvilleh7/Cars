@@ -1,102 +1,91 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<c:set var="urlCarAdd" value="/car/add"/>
+<c:set var="urlMotorShows" value="/motor_show/list"/>
+<c:set var="urlCars" value="/car/list"/>
+<c:set var="urlMain" value="/main"/>
+<c:set var="urlBootstrap" value="/css/bootstrap.min.css"/>
+<c:set var="urlStyle" value="/css/style.css"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="${urlBootstrap}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="${urlStyle}" rel="stylesheet" type="text/css" media="all"/>
     <title>All cars</title>
-
 </head>
-<body>
+<body class="CarAll">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsive-menu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="responsive-menu">
-            <div class="bar-left col-lg-10">
-                <form class="form-inline" method="get" action="/car/list">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/main">Main page</a></li>
-                        <li><a href="/motor_show/list">All motor shows</a></li>
-                        <li><a href="/car/add">Create car</a></li>
+        <div class="bar-left col-lg-10">
+            <form class="form-inline" method="get" action="${urlCars}">
+                <ul class="nav navbar-nav">
+                    <li><a href="${urlMain}">Main page</a></li>
+                    <li><a href="${urlCars}">All cars</a></li>
+                    <li><a href="${urlMotorShows}">All motor shows</a></li>
+                    <li><a href="${urlCarAdd}">Create car</a></li>
 
-                        <li class="menu-bar-page">
-                            <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)-1}">
-                                Previous
-                            </button>
-                        </li>
-                        <li class="menu-bar-count">
+                    <li class="menu-bar-page">
+                        <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if>
+                                class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)-1}">
+                            Previous
+                        </button>
+                    </li>
+                    <li class="menu-bar-count">
+                        <label>
+                            <input type="text" class="pageCount" disabled="disabled"
+                                   value="${page.pageNumber}/${page.pageCount}">
+                        </label>
+                    </li>
+                    <li class="menu-bar">
+                        <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if>
+                                class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)+1}">Next
+                        </button>
+                    </li>
+                    <li class="menu-bar-beg">
+                        <div>
+
                             <label>
-                                <input type="text" class="pageCount" disabled="disabled"
-                                       value="${page.pageNumber}/${page.pageCount}">
+                                <select class="form-control" name="pageSize" size="1">
+                                    <option <c:if test="${page.pageSize eq 5}"> selected= "selected"</c:if>
+                                            value="5">
+                                        5
+                                    </option>
+                                    <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if>
+                                            value="10">
+                                        10
+                                    </option>
+                                    <option <c:if test="${page.pageSize eq 25}"> selected="selected" </c:if>
+                                            value="25">
+                                        25
+                                    </option>
+                                    <option <c:if test="${page.pageSize eq 35}"> selected="selected" </c:if>
+                                            value="35">
+                                        35
+                                    </option>
+                                </select>
                             </label>
-                        </li>
-                        <li class="menu-bar">
-                            <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)+1}">Next
-                            </button>
-                        </li>
-                        <li class="menu-bar-beg">
-                            <div>
-
-                                <label>
-                                    <select class="form-control" name="pageSize" size="1">
-                                        <option <c:if test="${page.pageSize eq 5}"> selected= "selected"</c:if>
-                                                value="5">
-                                            5
-                                        </option>
-                                        <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if>
-                                                value="10">
-                                            10
-                                        </option>
-                                        <option <c:if test="${page.pageSize eq 25}"> selected="selected" </c:if>
-                                                value="25">
-                                            25
-                                        </option>
-                                        <option <c:if test="${page.pageSize eq 35}"> selected="selected" </c:if>
-                                                value="35">
-                                            35
-                                        </option>
-                                    </select>
-                                </label>
-                                <button type="submit" class="btn btn-sm">Apply</button>
-                            </div>
-                        </li>
-                    </ul>
-                </form>
-            </div>
-            <div class="search col-lg-2">
-                <form class="form-inline" method="get" action="/car_list">
-                    <input type="text" name="searchValue" placeholder="Search" value="">
-                    <Strong>By</Strong>
-                    <label>
-                        <select name="searchCategory">
-                            <option value="model">Car model</option>
-                            <option value="productionDate">Car production date</option>
-                            <option value="manufacturer">Car manufacturer</option>
-                            <option value="manufacturerEmail">Car manufacturer e-mail</option>
-                            <option value="price">Car price</option>
-                            <option value="engineVolume">Car engine volume</option>
-                            <option value="vinCode">Car VIN code</option>
-                            <option value="motorShow.name">Motor Show</option>
-                        </select>
-                    </label>
-                    <button type="submit" class="btn btn-sm">Search</button>
-
-                </form>
-            </div>
+                            <button type="submit" class="btn btn-sm">Apply</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="search col-lg-2">
+            <form class="form-inline" method="get" action="${urlCars}">
+                <input type="text" name="searchValue" placeholder="Search" value="${searchValue}">
+                <Strong>By</Strong>
+                <label>
+                    <select name="searchCategory">
+                        <option value="model">Car model</option>
+                        <option value="manufacturer">Car manufacturer</option>
+                        <option value="price">Car price</option>
+                        <option value="engineVolume">Car engine volume</option>
+                        <option value="vinCode">Car VIN code</option>
+                    </select>
+                </label>
+                <button type="submit" class="btn btn-sm">Search</button>
+            </form>
         </div>
     </div>
 </div>
@@ -120,7 +109,7 @@
                 <td>${car.productionDate}</td>
                 <td>${car.manufacturer}</td>
                 <td>${car.manufacturerEmail}</td>
-                <td>${car.price}</td>
+                <td>${car.price} €</td>
                 <td>${car.engineVolume}</td>
                 <td>${car.vinCode}</td>
                 <td>${car.motorShow.name}</td>
@@ -142,7 +131,7 @@
                 </td>
                 <td>
                     <div>
-                        <a href="motor_show/cars/${car.motorShow.id}">To Motor Show</a>
+                        <a href="/motor_show/cars/${car.motorShow.id}">To Motor Show</a>
                     </div>
                 </td>
             </tr>

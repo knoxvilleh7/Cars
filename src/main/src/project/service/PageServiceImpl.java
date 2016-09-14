@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.model.Page;
 
+import static project.constants.AttributeConst.PAGE_SIZE_FOR_SEARCH;
 import static project.constants.PagesConst.*;
 
 @Service
@@ -31,7 +32,7 @@ public class PageServiceImpl implements PageService {
 
     public Page getPageForSearchCars(Integer pageSize, Integer pageNumber, Object searchValue, String searchCategory) {
         Page page;
-        page = pageProcessing(pageSize, pageNumber);
+        page = pageProcessing(PAGE_SIZE_FOR_SEARCH, pageNumber);
         page.setPageCount(getNumberOfPages(carService.getCarForSearchCount(searchValue, searchCategory), page.getPageSize()));
         getButtonsStatement(page);
         return page;
@@ -47,7 +48,7 @@ public class PageServiceImpl implements PageService {
 
     public Page getPageForSearchCarsInMotorShow(Integer pageSize, Integer pageNumber, Object searchValue, String searchCategory, Integer motorShowId) {
         Page page;
-        page = pageProcessing(pageSize, pageNumber);
+        page = pageProcessing(PAGE_SIZE_FOR_SEARCH, pageNumber);
         page.setPageCount(getNumberOfPages(carService.getCarForSearchCountInMotorShow(searchValue, searchCategory, motorShowId), page.getPageSize()));
         getButtonsStatement(page);
         return page;
@@ -63,7 +64,7 @@ public class PageServiceImpl implements PageService {
 
     public Page getPageForSearchMotorShows(Integer pageSize, Integer pageNumber, Object searchValue, String searchCategory) {
         Page page;
-        page = pageProcessing(pageSize, pageNumber);
+        page = pageProcessing(PAGE_SIZE_FOR_SEARCH, pageNumber);
         page.setPageCount(getNumberOfPages(this.motorShowService.getMotorShowForSearchCount(searchValue, searchCategory), page.getPageSize()));
         getButtonsStatement(page);
         return page;

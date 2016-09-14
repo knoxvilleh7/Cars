@@ -11,7 +11,7 @@ import project.util.ModelValidator;
 import java.util.List;
 import java.util.Map;
 
-import static project.constants.AttributeConst.MOTORSHOW;
+import static project.constants.AttributeConst.MOTOR_SHOW;
 
 @Service
 @Transactional
@@ -51,7 +51,7 @@ public class MotorShowServiceImpl implements MotorShowService {
     }
 
     public Long getMotorShowCount() {
-        return this.motorShowDao.getCount(MOTORSHOW, null);
+        return this.motorShowDao.getCount(MOTOR_SHOW, null);
     }
 
     public Long getMotorShowForSearchCount(Object searchValue, String searchCategory) {

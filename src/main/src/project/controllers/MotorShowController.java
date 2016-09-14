@@ -19,14 +19,13 @@ import java.util.List;
 import java.util.Objects;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.CarConst.EVOL;
-import static project.constants.CarConst.PRICE;
-import static project.constants.MotorShowConst.MID;
+import static project.constants.CarConst.*;
+import static project.constants.MotorShowConst.*;
 import static project.constants.PagesConst.*;
+import static project.constants.UrlConst.*;
 
 @Controller
 public class MotorShowController {
-
 
     private final CarService carService;
     private final PageService pageService;
@@ -39,8 +38,8 @@ public class MotorShowController {
         this.motorShowService = motorShowService;
     }
 
-    @RequestMapping(value = "/motor_show/cars/{id}", method = RequestMethod.GET)
-    public String motorShowAllCars(@PathVariable("id") Integer motorShowId, Model model, Integer pageNumber, Integer pageSize, String searchValue, String searchCategory) {
+    @RequestMapping(value = MOTOR_SHOW_CAR_LIST, method = RequestMethod.GET)
+    public String motorShowAllCars(@PathVariable(ID) Integer motorShowId, Model model, Integer pageNumber, Integer pageSize, String searchValue, String searchCategory) {
         Object parsedSearchValue;
         if (Objects.equals(searchCategory, PRICE) || Objects.equals(searchCategory, EVOL)) {
             parsedSearchValue = Double.parseDouble(searchValue);
@@ -58,11 +57,11 @@ public class MotorShowController {
         }
         model.addAttribute(CARS, cars);
         model.addAttribute(PAGE, page);
-        model.addAttribute(MOTORSHOW, motorShowService.getMShowById(motorShowId));
+        model.addAttribute(MOTOR_SHOW, motorShowService.getMShowById(motorShowId));
         return MSALLCARS;
     }
 
-    @RequestMapping("/motor_show/list")
+    @RequestMapping(MOTOR_SHOW_LIST)
     public String motorShowAll(Model model, Integer pageNumber, Integer pageSize, String searchValue, String searchCategory) {
 
         List<MotorShow> motorShows;
@@ -74,42 +73,42 @@ public class MotorShowController {
             page = pageService.getPageForSearchMotorShows(pageSize, pageNumber, searchValue, searchCategory);
             motorShows = motorShowService.getMotorShowsBySearch(searchValue, searchCategory, page.getPageNumber(), page.getPageSize());
         }
-        model.addAttribute(MSHOWS, motorShows);
+        model.addAttribute(MOTOR_SHOWS, motorShows);
         model.addAttribute(PAGE, page);
         return MSALL;
     }
 
-    @RequestMapping(value = "/motor_show/edit/{id}", method = RequestMethod.GET)
-    public String motorShowEdit(@PathVariable("id") Integer id, Model model) {
+    @RequestMapping(value = MOTOR_SHOW_EDIT, method = RequestMethod.GET)
+    public String motorShowEdit(@PathVariable(ID) Integer id, Model model) {
 
         MotorShow motorShow = motorShowService.getMShowById(id);
         model.addAttribute(MID, id);
-        model.addAttribute(MOTORSHOW, motorShow);
+        model.addAttribute(MOTOR_SHOW, motorShow);
         return MSEDIT;
     }
 
-    @RequestMapping("/motor_show/add")
+    @RequestMapping(MOTOR_SHOW_ADD)
     public String motorShowAdd(Model model) {
 
-        model.addAttribute(MOTORSHOW, new MotorShow());
+        model.addAttribute(MOTOR_SHOW, new MotorShow());
         return MSEDIT;
     }
 
-    @RequestMapping(value = "/motor_show/save", method = RequestMethod.POST)
-    public String motorShowSave(@ModelAttribute("motorShow") MotorShow motorShow, Model model) {
+    @RequestMapping(value = MOTOR_SHOW_SAVE, method = RequestMethod.POST)
+    public String motorShowSave(@ModelAttribute(MOTOR_SHOW) MotorShow motorShow, Model model) {
 
         try {
             motorShowService.mShowSave(motorShow);
             return MSALLCONT;
         } catch (ValidException validException) {
-            model.addAttribute(MOTORSHOW, motorShow);
+            model.addAttribute(MOTOR_SHOW, motorShow);
             model.addAttribute(ERRS, validException.getErrs());
             return MSEDIT;
         }
     }
 
-    @RequestMapping(value = "/motor_show/delete/{id}", method = RequestMethod.GET)
-    public String motorShowDelete(@PathVariable("id") Integer id) {
+    @RequestMapping(value = MOTOR_SHOW_DELETE, method = RequestMethod.GET)
+    public String motorShowDelete(@PathVariable(ID) Integer id) {
 
         motorShowService.delete(id);
 

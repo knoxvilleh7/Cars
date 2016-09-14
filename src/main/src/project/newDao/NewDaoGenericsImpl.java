@@ -116,7 +116,7 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
         try {
             criteria = session.createCriteria(aClass);
             if (id != null) {
-                criteria.add(Restrictions.like("motorShowId", id));
+                criteria.add(Restrictions.like("motorShow.id", id));
             }
             criteria.add(Restrictions.like(searchCategory, searchValue));
             criteria.setProjection(Projections.rowCount());
@@ -134,7 +134,7 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
         try {
             Criteria criteria = session.createCriteria(aClass).add(Restrictions.like(searchCategory, searchValue));
             if (id != null) {
-                criteria.add(Restrictions.like("motorShowId", id));
+                criteria.add(Restrictions.like("motorShow.id", id));
             }
             criteria.setFirstResult((pageNumber - 1) * pageSize);
             criteria.setMaxResults(pageSize);

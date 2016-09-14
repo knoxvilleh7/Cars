@@ -23,6 +23,7 @@ import java.util.Objects;
 import static project.constants.AttributeConst.*;
 import static project.constants.CarConst.*;
 import static project.constants.PagesConst.*;
+import static project.constants.UrlConst.*;
 
 
 @Controller
@@ -39,7 +40,7 @@ public class CarController {
         this.carService = carService;
     }
 
-    @RequestMapping("/car/list")
+    @RequestMapping(CAR_LIST)
     public String carShowAll(Model model, Integer pageNumber, Integer pageSize, String searchValue, String searchCategory) {
         Object parsedSearchValue;
         if (Objects.equals(searchCategory, PRICE) || Objects.equals(searchCategory, EVOL)) {
@@ -54,15 +55,17 @@ public class CarController {
             cars = carService.getCars(page.getPageNumber(), page.getPageSize());
         } else {
             page = pageService.getPageForSearchCars(pageSize, pageNumber, parsedSearchValue, searchCategory);
-            cars = carService.getCarsBySearch(searchValue, searchCategory, page.getPageNumber(), page.getPageSize());
+            cars = carService.getCarsBySearch(parsedSearchValue, searchCategory, page.getPageNumber(), page.getPageSize());
+            model.addAttribute(SEARCH, parsedSearchValue);
         }
+
         model.addAttribute(CARS, cars);
         model.addAttribute(PAGE, page);
         return CARSALL;
     }
 
-    @RequestMapping(value = "/car/edit/{id}", method = RequestMethod.GET)
-    public String carEdit(@PathVariable("id") Integer id, ModelMap model) {
+    @RequestMapping(value = CAR_EDIT, method = RequestMethod.GET)
+    public String carEdit(@PathVariable(ID) Integer id, ModelMap model) {
 
         Car car = carService.getCarById(id);
         model.addAttribute(ID, id);
@@ -70,37 +73,35 @@ public class CarController {
         return CAREDIT;
     }
 
-    @RequestMapping(value = "/car/copy/{id}", method = RequestMethod.GET)
-    public String carCopy(@PathVariable("id") Integer id, ModelMap model) {
-
+    @RequestMapping(value = CAR_COPY, method = RequestMethod.GET)
+    public String carCopy(@PathVariable(ID) Integer id, ModelMap model) {
         Car car = carService.getCarById(id);
         car.setId(null);
         car.setMotorShow(null);
         car.setVinCode(null);
         List<MotorShow> mShows = motorShowService.getAllMotorShowsForRegistration();
-        model.addAttribute(MSHOWS, mShows);
-        model.addAttribute(ID, id);
+        model.addAttribute(MOTOR_SHOWS, mShows);
         model.addAttribute(CAR, car);
         return CAREDIT;
     }
 
-    @RequestMapping("/car/add")
+    @RequestMapping(CAR_ADD)
     public String carAdd(Model model) {
         List<MotorShow> mShows = motorShowService.getAllMotorShowsForRegistration();
-        model.addAttribute(MSHOWS, mShows);
+        model.addAttribute(MOTOR_SHOWS, mShows);
         model.addAttribute(CAR, new Car());
         return CAREDIT;
     }
 
-    @RequestMapping(value = "/car/save", method = RequestMethod.POST)
-    public String carSave(@ModelAttribute("car") Car car, Model model) {
+    @RequestMapping(value = CAR_SAVE, method = RequestMethod.POST)
+    public String carSave(@ModelAttribute(CAR) Car car, Model model) {
 
         try {
             carService.saveCar(car);
             return CARSOFMS + car.getMotorShow().getId().toString();
         } catch (ValidException validException) {
             List<MotorShow> mShows = motorShowService.getAllMotorShowsForRegistration();
-            model.addAttribute(MSHOWS, mShows);
+            model.addAttribute(MOTOR_SHOWS, mShows);
             model.addAttribute(ID, car.getId());
             model.addAttribute(CAR, car);
             model.addAttribute(ERRS, validException.getErrs());
@@ -108,18 +109,15 @@ public class CarController {
         }
     }
 
-    @RequestMapping(value = "/car/delete/{id}/{motorShowId}", method = RequestMethod.GET)
-    public String carDelete(@PathVariable("id") Integer id, @PathVariable("motorShowId") Integer motorShowId) {
-
+    @RequestMapping(value = CAR_DELETE, method = RequestMethod.GET)
+    public String carDelete(@PathVariable(ID) Integer id, @PathVariable(MSID) Integer motorShowId) {
         carService.deleteCar(id);
         return CARSOFMS + motorShowId.toString();
-
     }
-
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
