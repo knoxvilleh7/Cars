@@ -11,9 +11,6 @@ import static project.constants.CarConst.*;
 import static project.constants.MotorShowConst.*;
 import static project.constants.PageConst.*;
 
-/**
- * Created on 15.08.2016.
- */
 public class Transformer {
     public static Car getCarParam(HttpServletRequest request) {
         Car car = new Car();
@@ -45,9 +42,5 @@ public class Transformer {
         page.setPageSize(Util.getInteger(request, SIZE));
 
         return page;
-    }
-    public  static String getCarVin(HttpServletRequest request){
-        String vin = Util.getString(request, VIN);
-        return vin;
     }
 }

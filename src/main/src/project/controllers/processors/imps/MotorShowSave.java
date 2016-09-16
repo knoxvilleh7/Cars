@@ -5,7 +5,6 @@ import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.MotorShow;
 import project.service.MotorShowService;
-import project.service.MotorShowServiceImpl;
 import project.transformer.Transformer;
 
 import javax.servlet.ServletException;
@@ -13,12 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static project.constants.AttributeConst.*;
-import static project.constants.PagesConst.*;
+import static project.constants.AttributeConst.ERRS;
+import static project.constants.AttributeConst.MOTORSHOW;
+import static project.constants.PagesConst.MSALLCONT;
+import static project.constants.PagesConst.MSEDIT;
 
-/**
- * Created on 16.08.2016.
- */
 public class MotorShowSave implements RequestInterface {
 
     private MotorShowService motorShowService;
@@ -33,7 +31,6 @@ public class MotorShowSave implements RequestInterface {
             motorShowService.mShowSave(motorShow);
             response.sendRedirect(MSALLCONT);
         } catch (ValidException validException) {
-
             request.setAttribute(ERRS, validException.getErrs());
             request.setAttribute(MOTORSHOW, motorShow);
             request.getRequestDispatcher(MSEDIT).forward(request, response);

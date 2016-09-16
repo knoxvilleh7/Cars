@@ -3,14 +3,4 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-
-
-
-        <!--<init-param>-->
-            <!--<param-name>contextConfigLocation</param-name>-->
-            <!--<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>-->
-        <!--</init-param>-->
-
-
-
 </web-app>

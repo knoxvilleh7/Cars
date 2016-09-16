@@ -5,9 +5,7 @@ import project.exception.DaoException;
 import project.model.MotorShow;
 import project.model.Page;
 import project.service.MotorShowService;
-import project.service.MotorShowServiceImpl;
 import project.service.PageService;
-import project.service.PageServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -17,11 +15,8 @@ import java.io.IOException;
 import java.util.List;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.PagesConst.*;
+import static project.constants.PagesConst.MSALL;
 
-/**
- * Created on 15.08.2016.
- */
 public class MotorShowShowAll implements RequestInterface {
 
 
@@ -37,7 +32,6 @@ public class MotorShowShowAll implements RequestInterface {
     }
 
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
-
 
         String searchValue = Util.getString(request, SEARCH);
         String searchCategory = Util.getString(request, SEARCH_BY);

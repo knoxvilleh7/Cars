@@ -5,9 +5,7 @@ import project.exception.DaoException;
 import project.model.Car;
 import project.model.Page;
 import project.service.CarService;
-import project.service.CarServiceImpl;
 import project.service.PageService;
-import project.service.PageServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -22,10 +20,6 @@ import static project.constants.CarConst.EVOL;
 import static project.constants.CarConst.PRICE;
 import static project.constants.PagesConst.MSALLCARS;
 
-
-/**
- * Created on 16.08.2016.
- */
 public class MotorShowAllCarsShow implements RequestInterface {
 
     private CarService carService;

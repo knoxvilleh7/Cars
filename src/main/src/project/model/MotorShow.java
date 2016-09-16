@@ -3,28 +3,20 @@ package project.model;
 import net.sf.oval.constraint.NotEmpty;
 import net.sf.oval.constraint.NotNull;
 
-import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
-//@Table(name= "motor_shows")
 public class MotorShow {
 
-//    @Id
-//    @GeneratedValue
     private Integer id;
 
     @NotNull(message = "Field is empty")
     @NotEmpty(message = "Field is empty")
     private String name;
 
-//    @Column(name= "address", length=100)
     @NotNull(message = "Field is empty")
     @NotEmpty (message = "Field is empty")
     private String address;
 
-
-//    @OneToMany(mappedBy = "motorShow", cascade = CascadeType.ALL)
     private Set<Car> cars;
 
     public MotorShow() {

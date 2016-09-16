@@ -5,9 +5,7 @@ import project.exception.DaoException;
 import project.model.Car;
 import project.model.Page;
 import project.service.CarService;
-import project.service.CarServiceImpl;
 import project.service.PageService;
-import project.service.PageServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -18,13 +16,10 @@ import java.util.List;
 import java.util.Objects;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.CarConst.*;
-import static project.constants.PagesConst.*;
+import static project.constants.CarConst.EVOL;
+import static project.constants.CarConst.PRICE;
+import static project.constants.PagesConst.CARSALL;
 
-
-/**
- * Created on 16.08.2016.
- */
 public class CarShowAll implements RequestInterface {
 
     private CarService carService;
@@ -47,7 +42,6 @@ public class CarShowAll implements RequestInterface {
         }else{
             searchValue = Util.getString(request, SEARCH);
         }
-
         List<Car> cars;
         Page page;
         if (searchValue == null && searchCategory == null) {

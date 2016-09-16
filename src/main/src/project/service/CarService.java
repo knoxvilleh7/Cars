@@ -6,9 +6,6 @@ import project.model.Car;
 
 import java.util.List;
 
-/**
- * Created on 15.08.2016.
- */
 public interface CarService {
 
     void saveCar(Car car) throws ValidException, DaoException;
@@ -34,6 +31,4 @@ public interface CarService {
     List<Car> getCarsBySearch(Object searchValue,String searchCategory,Integer PageNumber,Integer PageSize);
 
     List<Car> getCarsBySearchInMotorShow(Integer motorShowId, Object searchValue,String searchCategory,Integer PageNumber,Integer PageSize);
-
-
 }

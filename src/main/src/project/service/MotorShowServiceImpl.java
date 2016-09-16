@@ -2,10 +2,9 @@ package project.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.newDao.MotorShowDao;
-import project.newDao.MotorShowDaoImpl;
 import project.exception.ValidException;
 import project.model.MotorShow;
+import project.newDao.MotorShowDao;
 import project.util.ModelValidator;
 
 import java.util.List;

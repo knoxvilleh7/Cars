@@ -4,9 +4,6 @@ import project.model.Page;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created on 25.08.2016.
- */
 public interface PageService {
 
     Long getNumberOfPages(Long Cars, Integer NumberOfCars);

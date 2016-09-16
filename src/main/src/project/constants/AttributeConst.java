@@ -1,8 +1,5 @@
 package project.constants;
 
-/**
- * Created on 19.08.2016.
- */
 public class AttributeConst {
 
     public static final String CARS = "cars";

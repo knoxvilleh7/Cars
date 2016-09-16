@@ -1,11 +1,8 @@
 package project.exception;
 
-/**
- * Created on 19.08.2016.
- */
 public class DaoException extends Exception{
 
-    String error;
+    private String error;
 
     public DaoException(String message) {
         error = message;

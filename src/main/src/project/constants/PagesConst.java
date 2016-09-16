@@ -1,8 +1,5 @@
 package project.constants;
 
-/**
- * Created on 19.08.2016.
- */
 public class PagesConst {
 
     public static final String MSALLCARS =  "pages/MotorShowAllCarShow.jsp";

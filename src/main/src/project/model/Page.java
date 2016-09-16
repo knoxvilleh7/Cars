@@ -1,8 +1,5 @@
 package project.model;
 
-/**
- * Created on 25.08.2016.
- */
 public class Page {
 
     private Integer pageNumber;
@@ -10,15 +7,6 @@ public class Page {
     private Integer pageSize;
     private Boolean toNext;
     private Boolean toPrev;
-
-
-    public Page(Integer pageNumber, Long pageCount, Integer pageSize, Boolean toNext, Boolean toPrev) {
-        this.pageNumber = pageNumber;
-        this.pageCount = pageCount;
-        this.pageSize = pageSize;
-        this.toNext = toNext;
-        this.toPrev = toPrev;
-    }
 
     public Page() {
     }

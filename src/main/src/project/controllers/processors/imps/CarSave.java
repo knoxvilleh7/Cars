@@ -5,9 +5,7 @@ import project.exception.DaoException;
 import project.exception.ValidException;
 import project.model.Car;
 import project.service.CarService;
-import project.service.CarServiceImpl;
 import project.service.MotorShowService;
-import project.service.MotorShowServiceImpl;
 import project.transformer.Transformer;
 import project.util.Util;
 
@@ -20,9 +18,6 @@ import static project.constants.AttributeConst.*;
 import static project.constants.PagesConst.CAREDIT;
 import static project.constants.PagesConst.CARSOFMS;
 
-/**
- * Created on 16.08.2016.
- */
 public class CarSave implements RequestInterface {
 
     private MotorShowService motorShowService;

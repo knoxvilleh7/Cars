@@ -6,9 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
-/**
- * Created on 15.08.2016.
- */
 public class Util {
     public static String getString(HttpServletRequest request, String param) {
         return request.getParameter(param);
@@ -47,22 +44,12 @@ public class Util {
         java.util.Date parsed = null;
         try {
             parsed = format.parse(request.getParameter(param));
-        } catch (ParseException ignored) {}
+        } catch (ParseException ignored) {
+        }
 
         if (parsed != null) {
             result = new java.sql.Date(parsed.getTime());
         }
         return result;
     }
-
-//    public static Date convertSqlToUtilDate(java.sql.Date date){
-//
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        java.util.Date result = null;
-//        try{
-//            result = ;
-//        }catch (Exception ignored) {}
-//        return result;
-//    }
-
 }

@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import project.exception.ValidException;
 import project.model.Car;
 import project.newDao.CarDao;
-import project.newDao.CarDaoImpl;
 import project.util.ModelValidator;
 
 import java.util.List;

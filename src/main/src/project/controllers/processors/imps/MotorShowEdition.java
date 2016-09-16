@@ -14,9 +14,6 @@ import java.io.IOException;
 import static project.constants.AttributeConst.*;
 import static project.constants.PagesConst.MSEDIT;
 
-/**
- * Created on 16.08.2016.
- */
 public class MotorShowEdition implements RequestInterface {
 
     private MotorShowService motorShowService;

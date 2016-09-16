@@ -1,10 +1,11 @@
 package project.newDao;
 
-import org.hibernate.*;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-//import org.slf4j.//logger.*
-//import org.slf4j.//logger.*
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,12 +13,7 @@ import java.util.Objects;
 
 @Repository
 class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
-
-    protected SessionFactory sessionFactory;
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+    SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -28,14 +24,12 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
     NewDaoGenericsImpl(Class aClass) {
         this.aClass = aClass;
     }
-//    private final //logger.*
 
     @Override
     public void saveOrUpdate(T obj) {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.saveOrUpdate(obj);
-//            //logger.*
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,7 +43,6 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
         T obj = null;
         try {
             obj = (T) session.get(aClass, id);
-//            //logger.*
         } catch (RuntimeException ignored) {
         }
         return obj;
@@ -59,20 +52,16 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
     @SuppressWarnings("unchecked")
     public List<T> getAll(Integer pageNumber, Integer pageSize) {
 
-
         Session session = sessionFactory.getCurrentSession();
-
-        List<T> objs = null;
-
+        List<T> objects = null;
         try {
             Criteria criteria = session.createCriteria(aClass);
             criteria.setFirstResult((pageNumber - 1) * pageSize);
             criteria.setMaxResults(pageSize);
-            objs = (List<T>) criteria.list();
-            //logger.*
+            objects = (List<T>) criteria.list();
         } catch (RuntimeException ignored) {
         }
-        return objs;
+        return objects;
     }
 
     @Override
@@ -80,7 +69,6 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
         Session session = sessionFactory.getCurrentSession();
         try {
             session.delete(obj);
-            //logger.*
         } catch (RuntimeException ignored) {
         }
     }
@@ -118,7 +106,6 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
             criteria.add(Restrictions.like(searchCategory, searchValue));
             criteria.setProjection(Projections.rowCount());
             count = (Long) criteria.uniqueResult();
-            //logger.*
         } catch (RuntimeException ignored) {
         }
         return count;
@@ -126,7 +113,7 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
 
     @SuppressWarnings("unchecked")
     public List<T> getObjectsForSearch(Integer id, Object searchValue, String searchCategory, Integer pageNumber, Integer pageSize) {
-        List<T> objs = null;
+        List<T> objects = null;
         Session session = sessionFactory.getCurrentSession();
         try {
             Criteria criteria = session.createCriteria(aClass).add(Restrictions.like(searchCategory, searchValue));
@@ -135,11 +122,10 @@ class NewDaoGenericsImpl<T> implements NewDaoGenerics<T> {
             }
             criteria.setFirstResult((pageNumber - 1) * pageSize);
             criteria.setMaxResults(pageSize);
-            objs = criteria.list();
-            //logger.*
+            objects = criteria.list();
         } catch (RuntimeException ignored) {
         }
-        return objs;
+        return objects;
     }
 }
 

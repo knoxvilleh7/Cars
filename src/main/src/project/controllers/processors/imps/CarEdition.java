@@ -5,9 +5,7 @@ import project.exception.DaoException;
 import project.model.Car;
 import project.model.MotorShow;
 import project.service.CarService;
-import project.service.CarServiceImpl;
 import project.service.MotorShowService;
-import project.service.MotorShowServiceImpl;
 import project.util.Util;
 
 import javax.servlet.ServletException;
@@ -17,8 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static project.constants.AttributeConst.*;
-import static project.constants.AttributeConst.ID;
-import static project.constants.PagesConst.*;
+import static project.constants.PagesConst.CAREDIT;
 
 public class CarEdition implements RequestInterface {
 

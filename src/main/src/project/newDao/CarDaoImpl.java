@@ -3,10 +3,7 @@ package project.newDao;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import project.model.Car;
 
@@ -18,13 +15,10 @@ public class CarDaoImpl extends NewDaoGenericsImpl<Car> implements CarDao {
     public CarDaoImpl(Class aClass) {
         super(aClass);
     }
-    //??????????
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
-    private static final Logger logger = LoggerFactory.getLogger(CarDao.class);
 
     @SuppressWarnings("unchecked")
     public List<Car> getCarsByMSId(Integer MotorShowId, Integer pageNumber, Integer pageSize) {
@@ -37,13 +31,13 @@ public class CarDaoImpl extends NewDaoGenericsImpl<Car> implements CarDao {
             criteria.setFirstResult((pageNumber - 1) * pageSize);
             criteria.setMaxResults(pageSize);
             cars = criteria.list();
-            logger.info("List of cars successfully loaded="+cars);
         } catch (RuntimeException ignored) {
         }
         return cars;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Car getByVin(String vinCode) {
         Session session = sessionFactory.getCurrentSession();
         Car car = null;
@@ -53,9 +47,6 @@ public class CarDaoImpl extends NewDaoGenericsImpl<Car> implements CarDao {
             if (result != null && !result.isEmpty()) {
                 car = result.get(0);
             }
-//            отэто по id достает, а не по стринге какого-то поля
-            logger.info("Car successfully loaded="+car);
-
         } catch (RuntimeException ignored) {
         }
         return car;

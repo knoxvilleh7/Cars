@@ -1,8 +1,5 @@
 package project.constants;
 
-/**
- * Created on 15.08.2016.
- */
 public class CarConst {
     public static final String ID = "id";
     public static final String MODEL = "model";
