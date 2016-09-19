@@ -13,7 +13,7 @@ public class Car {
     @NotEmpty (message = "Field is empty")
     private String model;
 
-    @DateRange (max = "tomorrow", message = "Wrong date")
+    @DateRange (max = "today", message = "Wrong date")
     @NotNull (message = "Field is empty")
     @NotEmpty (message = "Field is empty")
     private Date productionDate;

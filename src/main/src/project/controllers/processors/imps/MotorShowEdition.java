@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 import static project.constants.AttributeConst.*;
 import static project.constants.PagesConst.MSEDIT;
@@ -26,8 +27,10 @@ public class MotorShowEdition implements RequestInterface {
 
         Integer motorShowId = Util.getInteger(request, MSID);
         if (motorShowId != null) {
-            request.setAttribute(MOTORSHOW, this.motorShowService.getMShowById(motorShowId));
+            request.setAttribute(MOTORSHOW, motorShowService.getMShowById(motorShowId));
         }
+        request.setAttribute(ERRS, Collections.EMPTY_MAP);
         request.getRequestDispatcher(MSEDIT).forward(request, response);
+
     }
 }

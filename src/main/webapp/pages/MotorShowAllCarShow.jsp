@@ -2,8 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="cars" scope="request" type="java.util.List"/>
-<jsp:useBean id="page" scope="request" type="java.util.List"/>
-<jsp:useBean id="car" scope="request" type="java.util.List"/>
+<jsp:useBean id="pageList" scope="request" class="project.model.Page"/>
 <jsp:useBean id="motorShowId" scope="request" type="java.lang.Integer"/>
 <c:set var="urlMotorShowCarsList" value="mscars?motorShowId=${motorShowId}"/>
 <c:set var="urlMotorShowCars" value="mscars"/>
@@ -12,20 +11,11 @@
 <c:set var="urlCarAdd" value="caredition?motorShowId=${motorShowId}"/>
 <c:set var="urlCarEdit" value="caredition"/>
 <c:set var="urlCarDelete" value="deletecar"/>
-<c:url value="${urlCarEdit}" var="edit">
-    <c:param name="car" value="${car.id}"/>
-    <c:param name="motorShowId" value="${car.motorShowId}"/>
-</c:url>
-<c:url value="${urlCarDelete}" var="delete">
-    <c:param name="car" value="${car.id}"/>
-    <c:param name="motorShowId" value="${car.motorShowId}"/>
-</c:url>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <title>Available cars</title>
@@ -39,46 +29,55 @@
                     <div>
                         <input type="hidden" name="motorShowId" value="${motorShowId}">
                     </div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
-                        <li><a href="${urlMotorShowList}">All motor shows</a></li>
-                        <li><a href="${urlCarList}">All cars</a></li>
-                        <li><a href="${urlCarAdd}">Create Car</a></li>
-                        <li class="menu-bar-page">
-                            <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)-1}">
-                                Previous
-                            </button>
-                        </li>
-                        <li class="menu-bar-count">
-                            <label>
-                                <input type="text" class="pageCount" disabled="disabled"
-                                       value="${page.pageNumber}/${page.pageCount}">
-                            </label>
-                        </li>
-                        <li class="menu-bar">
-                            <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)+1}">Next
-                            </button>
-                        </li>
-                        <li class="menu-bar-beg">
-                            <div>
+                    <div align="center">
+                        <ul class="nav navbar-nav">
+                            <li><a href="${pageContext.request.contextPath}/">Main page</a></li>
+                            <li><a href="${urlMotorShowList}">All motor shows</a></li>
+                            <li><a href="${urlCarList}">All cars</a></li>
+                            <li><a href="${urlCarAdd}">Create Car</a></li>
+
+                            <li class="menu-bar-page">
+                                <button type="submit" <c:if
+                                        test="${pageList.toPrev == false}"> disabled="disabled"</c:if>
+                                        class="btn btn-sm" name="pageNumber" value="${(pageList.pageNumber)-1}">
+                                    Previous
+                                </button>
+                            </li>
+                            <li class="menu-bar-count">
                                 <label>
-                                    <select class="form-control" name="pageSize" size="1">
-                                        <option <c:if test="${page.pageSize eq 5}"> selected="selected" </c:if> value="5">5
-                                        </option>
-                                        <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if> value="10">10
-                                        </option>
-                                        <option <c:if test="${page.pageSize eq 25}"> selected="selected" </c:if> value="25">25
-                                        </option>
-                                        <option <c:if test="${page.pageSize eq 35}"> selected="selected" </c:if> value="35">35
-                                        </option>
-                                    </select>
+                                    <input type="text" class="pageCount" disabled="disabled"
+                                           value="${pageList.pageNumber}/${pageList.pageCount}">
                                 </label>
-                                <button type="submit" class="btn btn-sm">Apply</button>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                            <li class="menu-bar">
+                                <button type="submit" <c:if
+                                        test="${pageList.toNext == false}"> disabled="disabled"</c:if>
+                                        class="btn btn-sm" name="pageNumber" value="${(pageList.pageNumber)+1}">Next
+                                </button>
+                            </li>
+                            <li class="menu-bar-beg">
+                                <div>
+                                    <label>
+                                        <select class="form-control" name="pageSize" size="1">
+                                            <option <c:if test="${pageList.pageSize eq 5}"> selected="selected" </c:if>
+                                                    value="5">5
+                                            </option>
+                                            <option <c:if test="${pageList.pageSize eq 10}"> selected="selected" </c:if>
+                                                    value="10">10
+                                            </option>
+                                            <option <c:if test="${pageList.pageSize eq 25}"> selected="selected" </c:if>
+                                                    value="25">25
+                                            </option>
+                                            <option <c:if test="${pageList.pageSize eq 35}"> selected="selected" </c:if>
+                                                    value="35">35
+                                            </option>
+                                        </select>
+                                    </label>
+                                    <button type="submit" class="btn btn-sm">Apply</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </form>
             </div>
             <div class="search col-lg-2">
@@ -86,7 +85,7 @@
                     <input type="text" name="search" placeholder="Search" value="">
                     <Strong>By</Strong>
                     <label>
-                        <select name="searchBy">
+                        <select name="searchBy" class="select">
                             <option value="model">Car model</option>
                             <option value="productionDate">Car production date</option>
                             <option value="manufacturer">Car manufacturer</option>
@@ -129,11 +128,19 @@
                 <td>${car.vinCode}</td>
                 <td>
                     <div>
+                        <c:url value="${urlCarEdit}" var="edit">
+                            <c:param name="car" value="${car.id}"/>
+                            <c:param name="motorShowId" value="${car.motorShowId}"/>
+                        </c:url>
                         <a href="${edit}">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
+                        <c:url value="${urlCarDelete}" var="delete">
+                            <c:param name="car" value="${car.id}"/>
+                            <c:param name="motorShowId" value="${car.motorShowId}"/>
+                        </c:url>
                         <a href="${delete}">Delete</a>
                     </div>
                 </td>

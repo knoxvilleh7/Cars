@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="car" scope="request" type="java.util.List"/>
-<jsp:useBean id="errs" scope="request" type="java.util.List"/>
+<jsp:useBean id="car" scope="request" class="project.model.Car"/>
+<jsp:useBean id="errors" scope="request" type="java.util.Map"/>
 <jsp:useBean id="mShows" scope="request" type="java.util.List"/>
-<jsp:useBean id="motorShow" scope="request" type="java.util.List"/>
+<jsp:useBean id="motorShow" scope="request" class="project.model.MotorShow"/>
 <jsp:useBean id="motorShowId" scope="request" type="java.lang.Integer"/>
 <jsp:useBean id="id" scope="request" type="java.lang.Integer"/>
 <c:set var="urlMotorShowList" value="motorshows"/>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="errs">
-            ${errs.model}
+            ${errors.model}
         </div>
 
         <div class="form-group">
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div>
-            ${errs.productionDate}
+            ${errors.productionDate}
         </div>
 
         <div class="form-group">
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div>
-            ${errs.manufacturer}
+            ${errors.manufacturer}
         </div>
 
         <div class="form-group">
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div>
-            ${errs.manufacturerEmail}
+            ${errors.manufacturerEmail}
         </div>
 
         <div class="form-group">
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div>
-            ${errs.price}
+            ${errors.price}
         </div>
 
         <div class="form-group">
@@ -95,7 +95,7 @@
             </div>
         </div>
         <div>
-            ${errs.engineVolume}
+            ${errors.engineVolume}
         </div>
 
         <div class="form-group">
@@ -106,15 +106,15 @@
             </div>
         </div>
         <div>
-            ${errs.vinCode}
+            ${errors.vinCode}
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
                 <label>
-                    <select name="motorShowIdFromSelect" size="1" <c:if
+                    <select name="motorShowIdFromSelect" size="1" class="selectMotorShow" <c:if
                         test="${motorShowId > 0 || id >0 }">hidden</c:if>>
-                    <option selected="selected">Choose Motor Show</option>
+                    <option selected="selected" disabled="disabled">Choose Motor Show</option>
                     <c:forEach var="MS" items="${mShows}">
                         <option value="${MS.id}">${MS.name}</option>
                     </c:forEach>
@@ -135,7 +135,7 @@
             <input type="hidden" name="motorShow" value="${motorShow}">
         </div>
 
-        <button type="submit" class="btn">Submit</button>
+        <button type="submit" class="btn btn-Edit">Submit</button>
 
     </form>
 </div>

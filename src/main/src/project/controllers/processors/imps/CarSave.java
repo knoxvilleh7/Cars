@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 import static project.constants.AttributeConst.*;
 import static project.constants.PagesConst.CAREDIT;
@@ -34,7 +35,10 @@ public class CarSave implements RequestInterface {
     public void method(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException {
         Car car = Transformer.getCarParam(request);
         Integer m = Util.getInteger(request, MSIDFS);
-
+        Integer nullId = 0;
+        if (car.getId() == 0) {
+            car.setId(null);
+        }
         if (m == null) {
             Integer motorShowId = Util.getInteger(request, MSIDFH);
             car.setMotorShowId(motorShowId);
@@ -47,7 +51,12 @@ public class CarSave implements RequestInterface {
             carService.saveCar(car);
             response.sendRedirect(CARSOFMS + car.getMotorShowId());
         } catch (ValidException validException) {
-            request.setAttribute(ID, car.getId());
+            if(car.getId()==null){
+                request.setAttribute(ID, nullId);
+            }else{
+                request.setAttribute(ID, car.getId());
+            }
+            request.setAttribute(MSHOWS, Collections.EMPTY_LIST);
             request.setAttribute(CAR, car);
             request.setAttribute(ERRS, validException.getErrs());
             request.setAttribute(MSID, car.getMotorShowId());

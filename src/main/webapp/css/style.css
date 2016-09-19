@@ -8,6 +8,9 @@
     height: 550px;
     margin-left: 4%;
 }
+.btn-Edit{
+    background-color: #64696e;
+}
 .navbar-nav{
     width: 1020px;
 }
@@ -36,8 +39,15 @@
     width: 1000px;
 }
 .pageCount{
-    width: 35px;
-    height: 50px;
+    width: 27px;
+    height: 30px;
+}
+.select{
+    width: 155px;
+}
+.selectMotorShow{
+    background-color: rgba(43, 54, 55, 0.85);
+    width: 170px;
 }
 .motorShowEdition {
     height: 550px;
@@ -51,8 +61,8 @@ body.carEdit {
     background-image: url("/img/bmv.jpg");
 }
 body.motorShowEdit {
-    background-image: url("/img/autoshow1.jpg");
-    background-size:100% 100%;
+    background-color: #949e9e;
+
 }
 
 .refs {

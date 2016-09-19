@@ -1,23 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="page" scope="request" type="java.util.List"/>
+<jsp:useBean id="pageList" scope="request" class="project.model.Page"/>
 <jsp:useBean id="motorShow" scope="request" type="java.util.List"/>
-<jsp:useBean id="MS" scope="request" type="java.util.List"/>
 <c:set var="urlMotorShowList" value="motorshows"/>
 <c:set var="urlCarList" value="cars"/>
 <c:set var="urlCarEdit" value="caredition"/>
 <c:set var="urlMotorShowEdit" value="motorshowedition"/>
 <c:set var="urlMotorShowCars" value="mscars"/>
 <c:set var="urlMotorShowDelete" value="deleteshow"/>
-<c:url value="${urlMotorShowEdit}" var="edit">
-    <c:param name="motorShowId" value="${MS.id}"/>
-</c:url>
-<c:url value="${urlMotorShowDelete}" var="delete">
-    <c:param name="motorShowId" value="${MS.id}"/>
-</c:url>
-<c:url value="${urlMotorShowCars}" var="MotorShowCars">
-    <c:param name="motorShowId" value="${MS.id}"/>
-</c:url>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,33 +30,33 @@
                         <li><a href="${urlCarEdit}">Create car</a></li>
                         <li><a href="${urlMotorShowEdit}">Create motor Show</a></li>
                         <li class="menu-bar-page">
-                            <button type="submit" <c:if test="${page.toPrev == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)-1}">
+                            <button type="submit" <c:if test="${pageList.toPrev == false}"> disabled="disabled"</c:if>
+                                    class="btn btn-sm" name="pageNumber" value="${(pageList.pageNumber)-1}">
                                 Previous
                             </button>
                         </li>
                         <li class="menu-bar-count">
                             <label>
                                 <input type="text" class="pageCount" disabled="disabled"
-                                       value="${page.pageNumber}/${page.pageCount}">
+                                       value="${pageList.pageNumber}/${pageList.pageCount}">
                             </label>
                         </li>
                         <li class="menu-bar">
-                            <button type="submit" <c:if test="${page.toNext == false}"> disabled="disabled"</c:if>
-                                    class="btn btn-sm" name="pageNumber" value="${(page.pageNumber)+1}">Next
+                            <button type="submit" <c:if test="${pageList.toNext == false}"> disabled="disabled"</c:if>
+                                    class="btn btn-sm" name="pageNumber" value="${(pageList.pageNumber)+1}">Next
                             </button>
                         </li>
                         <li class="menu-bar-beg">
                             <div>
                                 <label>
                                     <select class="form-control" name="pageSize" size="1">
-                                        <option <c:if test="${page.pageSize eq 5}"> selected="selected" </c:if> value="5">5
+                                        <option <c:if test="${pageList.pageSize eq 5}"> selected="selected" </c:if> value="5">5
                                         </option>
-                                        <option <c:if test="${page.pageSize eq 10}"> selected="selected" </c:if> value="10">10
+                                        <option <c:if test="${pageList.pageSize eq 10}"> selected="selected" </c:if> value="10">10
                                         </option>
-                                        <option <c:if test="${page.pageSize eq 25}"> selected="selected" </c:if> value="25">25
+                                        <option <c:if test="${pageList.pageSize eq 25}"> selected="selected" </c:if> value="25">25
                                         </option>
-                                        <option <c:if test="${page.pageSize eq 35}"> selected="selected" </c:if> value="35">35
+                                        <option <c:if test="${pageList.pageSize eq 35}"> selected="selected" </c:if> value="35">35
                                         </option>
                                     </select>
                                 </label>
@@ -81,7 +71,7 @@
                     <input type="text" name="search" placeholder="Search" value="">
                     <Strong>By</Strong>
                     <label>
-                        <select name="searchBy">
+                        <select name="searchBy" class="select">
                             <option value="name">Motor show name</option>
                             <option value="address">Motor show address</option>
                         </select>
@@ -108,16 +98,25 @@
                 <td><c:out value="${MS.address}"/></td>
                 <td>
                     <div>
+                        <c:url value="${urlMotorShowEdit}" var="edit">
+                            <c:param name="motorShowId" value="${MS.id}"/>
+                        </c:url>
                         <a href="${edit}">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div>
+                        <c:url value="${urlMotorShowDelete}" var="delete">
+                            <c:param name="motorShowId" value="${MS.id}"/>
+                        </c:url>
                         <a href="${delete}">Delete</a>
                     </div>
                 </td>
                 <td>
                     <div>
+                        <c:url value="${urlMotorShowCars}" var="MotorShowCars">
+                            <c:param name="motorShowId" value="${MS.id}"/>
+                        </c:url>
                         <a href="${MotorShowCars}">Show cars</a>
                     </div>
                 </td>
